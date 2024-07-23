@@ -98,18 +98,10 @@ academic growth and engagement.
 ---
 ## Setup
 
-Clone the project
-
-```bash
-  git clone https://github.com/felt-cute/fantastic-invention-learning-network.git
-  cd fantastic-invention-learning-network
-```
-
-Copy environment variables
+Copy environment variables to the [.env](.env) file
 ```bash
 cp .env.example .env
 ```
-Add the following environment variables to the [.env](.env) file
 `DATABASE_HOST`
 `DATABASE_PORT`
 `DATABASE_NAME`
