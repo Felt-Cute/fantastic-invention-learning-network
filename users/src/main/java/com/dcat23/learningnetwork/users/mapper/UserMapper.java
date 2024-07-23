@@ -6,7 +6,12 @@ import com.dcat23.learningnetwork.users.model.User;
 
 public class UserMapper {
     public static UserResponse mapToUserResponse(User user) {
-        return null;
+        return new UserResponse(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getRole()
+        );
     }
 
     public static User mapFromUserRegistrationDTO(UserRegistrationDTO userDTO, User user) {
