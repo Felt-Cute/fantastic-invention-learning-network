@@ -15,16 +15,27 @@ academic growth and engagement.
 
 ---
 ## Technical Stack
+
 ### Frontend
 - **Framework**: React or Angular for building a dynamic user interface.
 - **State Management**: Redux or Context API for managing application state.
+
 ### Backend
 - **Framework**: Spring Boot for the backend RESTful API.
 - **Database**: PostgreSQL or MongoDB for storing user data, resources, and discussions.
 - **Authentication**: Use Spring Security for user authentication and authorization.
+
 ### Hosting and Deployment
 - **Cloud Provider**: AWS, Heroku, or DigitalOcean for hosting the application.
 - **Containerization**: Docker for containerizing the application for easier deployment and scalability.
+
+---
+## Core Features
+- **User Management**: Registration, login, and profile management with role-based access control.
+- **Project Collaboration**: Create, join, and manage projects to facilitate teamwork.
+- **Resource Library**: Centralized library for uploading, accessing, and sharing educational resources.
+- **Discussion Forums**: Start discussions and engage in collaborative dialogues on academic topics.
+- **Notifications**: Real-time notifications about project updates and discussion replies.
 
 ---
 ## Monetization Strategies
@@ -34,6 +45,54 @@ academic growth and engagement.
 
 ---
 ## Modules
+
+### User Management Service
+- **Functionality**: Handles user registration, login, and profile management.
+- **Core Features**: User authentication and authorization, role-based access control, password management.
+
+### Project Management Service
+- **Functionality**: Manages creation, retrieval, updating, and deletion of projects.
+- **Core Features**: Project collaboration, membership management, and project details retrieval.
+
+### Resource Management Service
+- **Functionality**: Facilitates uploading, accessing, and managing educational resources.
+- **Core Features**: Resource sharing, categorization, and retrieval based on project association.
+
+### Discussion Management Service
+- **Functionality**: Manages discussion threads and messages between users.
+- **Core Features**: Creating discussion threads, posting messages, and retrieving discussions.
+
+### Notification Service
+- **Functionality**: Handles notifications for user activities and updates.
+- **Core Features**: Real-time notifications, retrieval of notifications, and management of notification states.
+
+### User Profile Service
+- **Functionality**: Manages user profile details and customization.
+- **Core Features**: Profile retrieval, updating, and deletion.
+
+### Analytics Service
+- **Functionality**: Collects and analyzes user activity data.
+- **Core Features**: Logging user activities, retrieving analytics data for users and projects.
+
+### API Gateway
+- **Functionality**: Acts as a single entry point for client requests to various microservices.
+- **Core Features**: Routing, load balancing, security enforcement, and request aggregation.
+
+### Inter-Service Communication
+- **Functionality**: Facilitates communication between microservices.
+- **Core Features**: RESTful APIs and gRPC for synchronous and asynchronous communication.
+
+### Data Management
+- **Functionality**: Manages data storage and retrieval across microservices.
+- **Core Features**: Integration with PostgreSQL or MongoDB for data persistence.
+
+### Event-Driven Architecture
+- **Functionality**: Supports asynchronous communication and event handling.
+- **Core Features**: Integration with Kafka for event streaming and decoupled service interactions.
+
+### Security and Monitoring
+- **Functionality**: Ensures application security and performance monitoring.
+- **Core Features**: Implementing Spring Security for authentication, centralized logging, and monitoring solutions like ELK Stack or Prometheus.
 
 
 ---
@@ -64,6 +123,7 @@ docker compose up -d
 ```
 ---
 ## [API Reference](http://localhost:8080/swagger-ui.html)
+
 ### [User Management Service](http://localhost:8080/swagger-ui.html)
 - ``POST /api/users/register``
   - Register a new user (student or educator).
@@ -75,6 +135,7 @@ docker compose up -d
   - Update user profile information.
 - `DELETE /api/users/{id} (admin)`
    - Delete a user account (admin only).
+
 ### [Project Management Service](http://localhost:8080/swagger-ui.html)
 - `POST /api/projects`
   - Create a new project.
@@ -86,6 +147,7 @@ docker compose up -d
   - Update project details.
 - `DELETE /api/projects/{projectId} (admin)`
    - Delete a project (admin only).
+
 ### [Resource Management Service](http://localhost:8080/swagger-ui.html)
 - `POST /api/resources`
   - Upload a new resource to a project.
@@ -97,6 +159,7 @@ docker compose up -d
   - Update resource details.
 - `DELETE /api/resources/{resourceId} (admin)`
    - Delete a resource (admin only).
+
 ### [Discussion Management Service](http://localhost:8080/swagger-ui.html)
 - `POST /api/discussions`
   - Start a new discussion thread.
@@ -108,6 +171,7 @@ docker compose up -d
   - Post a message in a discussion thread.
 - `GET /api/discussions/{discussionId}/messages`
    - Retrieve all messages in a specific discussion thread.
+
 ### [Notification Service](http://localhost:8080/swagger-ui.html)
 - `GET /api/notifications`
   - Retrieve a list of notifications for the authenticated user.
@@ -116,9 +180,26 @@ docker compose up -d
 - `DELETE /api/notifications/{notificationId}`
    - Delete a specific notification.
 
+### [User Profile Service](http://localhost:8080/swagger-ui.html)
+- `GET /api/profiles/{userId}`
+   - Retrieve detailed user profile information.
+- `PUT /api/profiles/{userId}`
+   - Update user profile details.
+- `DELETE /api/profiles/{userId}` (admin)
+   - Delete a user profile (admin only).
+
+### [Analytics Service](http://localhost:8080/swagger-ui.html)
+- `POST /api/analytics/log`
+   - Log user activity (e.g., resource access, project participation).
+- `GET /api/analytics/user/{userId}`
+   - Retrieve analytics data for a specific user.
+- `GET /api/analytics/project/{projectId}`
+   - Retrieve analytics data for a specific project.
 ---
 ## Database schema
+
 ### [User Management Service](Users/README.md#database-schema)
+
 #### [Users]()
 - `id` (Primary key)
 - `username`
@@ -126,14 +207,18 @@ docker compose up -d
 - `password`
 - `role` (ENUM: 'student', 'educator')
 - `created_at`
+
 ### [Project Management Service](Projects/README.md#database-schema)
+
 #### [Projects]()
 - `id` (Primary key)
 - `title`
 - `description`
 - `owner_id` (Foreign key referencing users.id)
 - `created_at`
+
 ### [Resource Management Service](Resources/README.md#database-schema)
+
 #### [Resources]()
 - `id` (Primary key)
 - `project_id` (Foreign key referencing projects.id)
@@ -141,100 +226,146 @@ docker compose up -d
 - `file_url`
 - `uploaded_by` (Foreign key referencing users.id)
 - `created_at`
+
 ### [Discussion Management Service](Discussions/README.md#database-schema)
+
 #### [Discussions]()
 - `id` (Primary key)
 - `project_id` (Foreign key referencing projects.id)
 - `title`
 - `created_by` (Foreign key referencing users.id)
 - `created_at`
+
 #### [Messages]()
 - `id` (Primary key)
 - `discussion_id` (Foreign key referencing discussions.id)
 - `message`
 - `posted_by` (Foreign key referencing users.id)
 - `created_at`
+
 ### [Notification Service](Notifications/README.md#database-schema)
+
 #### [Notifications]()
 - `id` (Primary key)
 - `user_id` (Foreign key referencing users.id)
 - `type`
 - `message`
+- `is_read` (Boolean)
 - `created_at`
+
+### [Analytics Service](analytics/README.md#database-schema)
+
+#### [User Activity]()
+- `id` (Primary key)
+- `user_id` (Foreign key referencing users.id)
+- `action_type` (ENUM: 'resource_access', 'project_participation', etc.)
+- `target_id` (ID of the resource or project)
+- `timestamp`
+
 ---
 ## Implementation Steps
+
 1. **Set Up the Development Environment**
-   - [] Install Java Development Kit (JDK)
-   - [] Set up a Spring Boot project using Spring Initializr
-   - [] Configure the project structure and dependencies (e.g., Spring Web, Spring Data JPA, Spring Security)
+    - [] Install Java Development Kit (JDK)
+    - [] Set up a Spring Boot project using Spring Initializr
+    - [] Configure the project structure and dependencies (e.g., Spring Web, Spring Data JPA, Spring Security)
+
 2. **Design the Database Schema**
-   - [] Create the database using PostgreSQL or another relational database
-   - [] Implement the database schema based on the defined tables for users, projects, resources, discussions, messages, and notifications
-   - [] Set up JPA entities corresponding to each table
+    - [] Create the database using PostgreSQL or another relational database
+    - [] Implement the database schema based on the defined tables for users, projects, resources, discussions, messages, and notifications
+    - [] Set up JPA entities corresponding to each table
+
 3. **Implement User Management Service**
-   - [] Create User entity and repository
-   - [] Implement user registration and login functionality
-   - [] Develop user profile management features
-   - [] Set up password hashing and validation
+    - [] Create User entity and repository
+    - [] Implement user registration and login functionality
+    - [] Develop user profile management features
+    - [] Set up password hashing and validation
+
 4. **Implement User Authentication and Authorization**
-   - [] Set up Spring Security for authentication
-   - [] Implement role-based access control (e.g., student, educator, admin)
-   - [] Configure JWT (JSON Web Tokens) for secure API access
+    - [] Set up Spring Security for authentication
+    - [] Implement role-based access control (e.g., student, educator, admin)
+    - [] Configure JWT (JSON Web Tokens) for secure API access
+
 5. **Develop Project Management Service**
-   - [] Create Project entity and repository
-   - [] Implement project creation, retrieval, updating, and deletion functionality
-   - [] Develop endpoints to manage project membership
+    - [] Create Project entity and repository
+    - [] Implement project creation, retrieval, updating, and deletion functionality
+    - [] Develop endpoints to manage project membership
+
 6. **Develop Resource Management Service**
-   - [] Create Resource entity and repository
-   - [] Implement resource upload, retrieval, updating, and deletion functionality
-   - [] Develop endpoints to associate resources with projects
+    - [] Create Resource entity and repository
+    - [] Implement resource upload, retrieval, updating, and deletion functionality
+    - [] Develop endpoints to associate resources with projects
+
 7. **Develop Discussion Management Service**
-   - [] Create Discussion and Message entities and repositories
-   - [] Implement discussion thread creation, message posting, and retrieval functionality
-   - [] Develop endpoints for managing discussions and messages
+    - [] Create Discussion and Message entities and repositories
+    - [] Implement discussion thread creation, message posting, and retrieval functionality
+    - [] Develop endpoints for managing discussions and messages
+
 8. **Implement Notification Service**
-   - [] Create Notification entity and repository
-   - [] Implement notification creation and retrieval functionality
-   - [] Develop endpoints for user notifications
+    - [] Create Notification entity and repository
+    - [] Implement notification creation and retrieval functionality
+    - [] Develop endpoints for user notifications
+
 9. **Implement RESTful APIs**
-   - [] Design and develop endpoints for each microservice
-   - [] Use Spring MVC for creating controllers
-   - [] Ensure proper request validation and error handling
-10. **Develop Frontend Application**
+    - [] Design and develop endpoints for each microservice
+    - [] Use Spring MVC for creating controllers
+    - [] Ensure proper request validation and error handling
+
+10. **Implement Inter-Service Communication**
+    - [] Choose between REST or gRPC for service communication
+    - [] Set up service discovery using Eureka or Consul for dynamic service registration and discovery
+    - [] Configure load balancing for API calls through the API Gateway
+
+11. **Develop Event-Driven Architecture**
+    - [] Integrate Kafka for event streaming and asynchronous communication between services
+    - [] Implement event sourcing where applicable to capture state changes as events
+
+12. **Implement Caching and Data Management**
+    - [] Use Redis for caching frequently accessed data and managing user sessions
+    - [] Implement rate limiting using Redis to control API usage
+
+13. **Develop Frontend Application**
     - [] Choose a frontend framework (e.g., React, Angular, Vue.js)
     - [] Set up the frontend project structure
     - [] Implement user interfaces for registration, login, project management, resource sharing, discussions, and notifications
     - [] Integrate RESTful APIs with the frontend application
-11. **Testing and Quality Assurance**
+
+14. **Testing and Quality Assurance**
     - [] Write unit tests for backend services and controllers
     - [] Implement integration tests for API endpoints
     - [] Conduct user acceptance testing (UAT) with target users
-12. **Deployment and Monitoring**
+
+15. **Deployment and Monitoring**
     - [] Choose a cloud provider (e.g., AWS, Heroku) for deployment
     - [] Set up CI/CD pipelines for automated deployment
-    - [] Implement monitoring and logging for application performance
-13. **Documentation**
+    - [] Implement monitoring and logging for application performance, using tools like ELK Stack or Prometheus
+
+16. **Documentation**
     - [] Create API documentation using Swagger or OpenAPI
     - [] Write user guides and technical documentation for future development
+
 ---
+
 ## Additional Considerations
 - **Data Privacy**: Ensure compliance with data protection regulations (e.g., GDPR, FERPA).
 - **Accessibility**: Implement features to support users with disabilities (e.g., screen reader compatibility).
 - **Scalability**: Design the architecture to handle increased user load and data volume.
+
 ## Bonus Features
 - **Gamification**: Introduce leaderboards and achievements to encourage user engagement.
 - **Discussion Polls**: Allow users to create polls within discussions to gather opinions.
 - **Resource Rating System**: Enable users to rate and review shared resources.
+
 ## To-Do
 - **User Feedback Mechanism**: Implement a system for users to provide feedback on features and usability.
 - **Mobile Responsiveness**: Ensure the frontend is fully responsive across devices.
 - **Performance Optimization**: Identify and optimize slow-performing queries and endpoints.
+
 ## Future Features
 - **Integration with External Tools**: Allow integration with tools like Google Drive, Dropbox, or educational platforms (e.g., Moodle).
 - **AI-Powered Recommendations**: Implement machine learning algorithms to suggest resources and discussions based on user behavior.
 - **Offline Access**: Enable users to access certain features and resources without an internet connection.
 ---
-
 ## 🔗 Links
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://dcatuns.vercel.app/)
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/devin-catuns/)
