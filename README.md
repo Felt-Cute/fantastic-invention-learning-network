@@ -46,7 +46,7 @@ academic growth and engagement.
 ---
 ## Modules
 
-### User Management Service
+### [User Management Service](users/README.md)
 - **Functionality**: Handles user registration, login, and profile management.
 - **Core Features**: User authentication and authorization, role-based access control, password management.
 
@@ -190,7 +190,7 @@ docker compose up -d
 ---
 ## Database schema
 
-### [User Management Service](Users/README.md#database-schema)
+### [User Management Service](./users/README.md#database-schema)
 
 #### [Users]()
 - `id` (Primary key)
