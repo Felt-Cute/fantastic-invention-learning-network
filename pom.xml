@@ -14,10 +14,12 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>fantastic-invention-learning-network</name>
     <description>Collaborative learning network</description>
+
+    <packaging>pom</packaging>
+
     <modules>
         <module>core</module>
     </modules>
-    <packaging>pom</packaging>
 
     <url/>
     <licenses>
