@@ -6,6 +6,7 @@ import com.dcat23.learningnetwork.users.dto.UserResponse;
 import com.dcat23.learningnetwork.users.dto.UserUpdateDTO;
 
 public interface UserService {
+
     UserResponse registerUser(UserRegistrationDTO userDTO);
 
     UserResponse loginUser(UserLoginDTO userLoginDTO);

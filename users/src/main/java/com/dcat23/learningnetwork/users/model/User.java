@@ -2,8 +2,8 @@ package com.dcat23.learningnetwork.users.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
-import javax.management.relation.Role;
 import java.time.LocalDateTime;
 
 @Data
@@ -19,16 +19,18 @@ public class User {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "pwd_hash", nullable = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private Role role;
+    private UserRole role;
 
-    @Column(name = "created_at", nullable = false)
+    @CreationTimestamp
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
 }

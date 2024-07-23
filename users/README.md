@@ -7,7 +7,7 @@ Handles user registration, login, and profile management.
 - role-based access control
 - password management
 
-## API Reference
+## [API Reference](http://localhost:8181/swagger-ui.html)
 
 - `POST /api/users/register`
     - Register a new user (student or educator).
@@ -23,7 +23,7 @@ Handles user registration, login, and profile management.
 
 ## Database Schema
 
-### [Users]()
+### [Users](src%2Fmain%2Fjava%2Fcom%2Fdcat23%2Flearningnetwork%2Fusers%2Fmodel%2FUser.java)[Users]()
 
 - `id` (Primary key)
 - `username`
