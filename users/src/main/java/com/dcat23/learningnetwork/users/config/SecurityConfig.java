@@ -22,7 +22,7 @@ public class SecurityConfig {
                                 "/api/users/login",
                                 "/api/users/register")
                         .permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
