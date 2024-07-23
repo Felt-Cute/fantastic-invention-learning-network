@@ -258,9 +258,9 @@ docker compose up -d
 ## Implementation Steps
 
 1. **Set Up the Development Environment**
-    - [] Install Java Development Kit (JDK)
-    - [] Set up a Spring Boot project using Spring Initializr
-    - [] Configure the project structure and dependencies (e.g., Spring Web, Spring Data JPA, Spring Security)
+    - [x] Install Java Development Kit (JDK)
+    - [x] Set up a Spring Boot project using Spring Initializr
+    - [x] Configure the project structure and dependencies (e.g., Spring Web, Spring Data JPA, Spring Security)
 
 2. **Design the Database Schema**
     - [] Create the database using PostgreSQL or another relational database
