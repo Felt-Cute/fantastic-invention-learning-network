@@ -5,7 +5,7 @@ import com.dcat23.learningnetwork.users.dto.UserRegistrationDTO;
 import com.dcat23.learningnetwork.users.dto.UserResponse;
 import com.dcat23.learningnetwork.users.dto.UserUpdateDTO;
 import com.dcat23.learningnetwork.users.mapper.UserMapper;
-import com.dcat23.learningnetwork.users.model.User;
+import com.dcat23.learningnetwork.users.model.UserEntity;
 import com.dcat23.learningnetwork.users.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,9 +20,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse registerUser(UserRegistrationDTO userDTO) {
-        User user = UserMapper.mapFromUserRegistrationDTO(userDTO, new User());
+        UserEntity user = UserMapper.mapFromUserRegistrationDTO(userDTO, new UserEntity());
         user.setPassword(passwordEncoder.encode(userDTO.password()));
-        User saved = userRepository.save(user);
+        UserEntity saved = userRepository.save(user);
         return UserMapper.mapToUserResponse(saved);
     }
 

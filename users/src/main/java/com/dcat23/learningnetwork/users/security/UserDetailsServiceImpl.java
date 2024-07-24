@@ -1,6 +1,7 @@
 package com.dcat23.learningnetwork.users.security;
 
 import com.dcat23.learningnetwork.users.model.Role;
+import com.dcat23.learningnetwork.users.model.UserEntity;
 import com.dcat23.learningnetwork.users.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,15 +30,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        com.dcat23.learningnetwork.users.model.User user = userRepository.findByEmail(username)
+        UserEntity user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
 
         List<GrantedAuthority> authorities = mapToAuthorities(user);
 
-        return new User(user.getUsername(), user.getPassword(), authorities);
+        return new User(user.getEmail(), user.getPassword(), authorities);
     }
 
-    private static List<GrantedAuthority> mapToAuthorities(com.dcat23.learningnetwork.users.model.User user) {
+    private static List<GrantedAuthority> mapToAuthorities(UserEntity user) {
         return user.getRoles().stream()
                 .map(Role::authority)
                 .toList();

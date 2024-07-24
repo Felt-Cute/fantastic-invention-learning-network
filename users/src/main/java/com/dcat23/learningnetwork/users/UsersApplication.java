@@ -1,7 +1,7 @@
 package com.dcat23.learningnetwork.users;
 
 import com.dcat23.learningnetwork.users.model.Role;
-import com.dcat23.learningnetwork.users.model.User;
+import com.dcat23.learningnetwork.users.model.UserEntity;
 import com.dcat23.learningnetwork.users.repository.UserRepository;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -46,16 +46,16 @@ public class UsersApplication {
     public CommandLineRunner runner(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
             String pwd = passwordEncoder.encode("password");
-            User admin = createAdmin(pwd);
-            User student = createStudent(pwd);
-            User educator = createEducator(pwd);
+            UserEntity admin = createAdmin(pwd);
+            UserEntity student = createStudent(pwd);
+            UserEntity educator = createEducator(pwd);
             userRepository.saveAll(List.of(admin, student, educator));
 
         };
     }
 
-    private User createEducator(String password) {
-        User educator = new User();
+    private UserEntity createEducator(String password) {
+        UserEntity educator = new UserEntity();
         educator.setUsername("educator");
         educator.setPassword(password);
         educator.setEmail("educator@myself.com");
@@ -63,8 +63,8 @@ public class UsersApplication {
         return educator;
     }
 
-    private User createStudent(String password) {
-        User student = new User();
+    private UserEntity createStudent(String password) {
+        UserEntity student = new UserEntity();
         student.setUsername("student");
         student.setPassword(password);
         student.setEmail("student@myself.com");
@@ -72,8 +72,8 @@ public class UsersApplication {
         return student;
     }
 
-    private User createAdmin(String password) {
-        User user = new User();
+    private UserEntity createAdmin(String password) {
+        UserEntity user = new UserEntity();
         user.setUsername("dcat23");
         user.setPassword(password);
         user.setEmail("dcat@myself.com");
