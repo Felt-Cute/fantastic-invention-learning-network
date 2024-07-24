@@ -23,7 +23,7 @@ Handles user registration, login, and profile management.
 
 ## Database Schema
 
-### [Users](src%2Fmain%2Fjava%2Fcom%2Fdcat23%2Flearningnetwork%2Fusers%2Fmodel%2FUser.java)[Users]()
+### [Users](src%2Fmain%2Fjava%2Fcom%2Fdcat23%2Flearningnetwork%2Fusers%2Fmodel%2FUser.java)
 
 - `id` (Primary key)
 - `username`

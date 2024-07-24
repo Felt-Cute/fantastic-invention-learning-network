@@ -114,7 +114,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!--    SERVICE TEST DEPENDENCIES    -->
+        <!--    TEST DEPENDENCIES    -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
