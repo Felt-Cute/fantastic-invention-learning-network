@@ -1,13 +1,12 @@
 package com.dcat23.learningnetwork.users.service;
 
-import com.dcat23.learningnetwork.users.dto.UserLoginDTO;
-import com.dcat23.learningnetwork.users.dto.UserRegistrationDTO;
-import com.dcat23.learningnetwork.users.dto.UserResponse;
-import com.dcat23.learningnetwork.users.dto.UserUpdateDTO;
+import com.dcat23.learningnetwork.users.dto.*;
 import com.dcat23.learningnetwork.users.mapper.UserMapper;
 import com.dcat23.learningnetwork.users.model.UserEntity;
 import com.dcat23.learningnetwork.users.repository.UserRepository;
+import com.dcat23.learningnetwork.users.security.JwtTokenGenerator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,12 +15,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final JwtTokenGenerator tokenGenerator;
 
     @Override
     public UserResponse registerUser(UserRegistrationDTO userDTO) {
@@ -32,9 +32,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void loginUser(UserLoginDTO userLoginDTO) {
+    public AuthResponseDTO loginUser(UserLoginDTO userLoginDTO) {
         Authentication auth = authenticateLogin(userLoginDTO);
         SecurityContextHolder.getContext().setAuthentication(auth);
+        String token = tokenGenerator.generateToken(auth);
+        return new AuthResponseDTO(token);
     }
 
     private Authentication authenticateLogin(UserLoginDTO userLoginDTO) {

@@ -1,19 +1,17 @@
 package com.dcat23.learningnetwork.users.controller;
 
-import com.dcat23.learningnetwork.users.dto.UserLoginDTO;
-import com.dcat23.learningnetwork.users.dto.UserRegistrationDTO;
-import com.dcat23.learningnetwork.users.dto.UserResponse;
-import com.dcat23.learningnetwork.users.dto.UserUpdateDTO;
+import com.dcat23.learningnetwork.users.dto.*;
 import com.dcat23.learningnetwork.users.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class UserController {
 
     private final UserService userService;
@@ -25,9 +23,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@Valid @RequestBody UserLoginDTO userLoginDTO){
-        userService.loginUser(userLoginDTO);
-        return ResponseEntity.status(HttpStatus.OK).body("Login Successful");
+    public ResponseEntity<AuthResponseDTO> loginUser(@Valid @RequestBody UserLoginDTO userLoginDTO){
+        AuthResponseDTO authResponse = userService.loginUser(userLoginDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(authResponse);
     }
 
     @PutMapping("/{id}")
@@ -35,5 +33,11 @@ public class UserController {
         UserResponse updatedUser = userService.updateUser(userUpdateDTO);
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<UserResponse> getUserById(@PathVariable Long id){
+//        UserResponse user = userService.getUserById(id);
+//        return ResponseEntity.status(HttpStatus.OK).body(user);
+//    }
 
 }
