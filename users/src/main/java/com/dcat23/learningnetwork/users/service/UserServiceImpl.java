@@ -8,6 +8,7 @@ import com.dcat23.learningnetwork.users.repository.UserRepository;
 import com.dcat23.learningnetwork.users.security.JwtTokenGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -19,10 +20,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class UserServiceImpl implements UserService {
 
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-    private final JwtTokenGenerator tokenGenerator;
 
     @Override
     public UserResponse registerUser(UserRegistrationDTO userDTO) {
@@ -36,7 +39,7 @@ public class UserServiceImpl implements UserService {
     public AuthResponseDTO loginUser(UserLoginDTO userLoginDTO) {
         Authentication auth = authenticateLogin(userLoginDTO);
         SecurityContextHolder.getContext().setAuthentication(auth);
-        String token = tokenGenerator.generateToken(auth);
+        String token = JwtTokenGenerator.generateToken(auth, jwtSecret);
         return new AuthResponseDTO(token);
     }
 
@@ -62,6 +65,19 @@ public class UserServiceImpl implements UserService {
     public UserResponse getUserById(Long id) {
         UserEntity user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
+        return UserMapper.mapToUserResponse(user);
+    }
+
+    /**
+     * Retrieves the user information after a successful login.
+     *
+     * @param auth the authentication object containing the user's credentials and details.
+     * @return a UserResponse object containing the user's information, or null if authentication fails.
+     */
+    @Override
+    public UserResponse getUserAfterLogin(Authentication auth) {
+        UserEntity user = userRepository.findByEmail(auth.getName())
+                .orElse(null);
         return UserMapper.mapToUserResponse(user);
     }
 }

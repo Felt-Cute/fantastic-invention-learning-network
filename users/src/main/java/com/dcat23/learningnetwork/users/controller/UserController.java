@@ -9,7 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import static com.dcat23.learningnetwork.users.security.SecurityConstants.JWT_HEADER;
 
 @RestController
 @RequestMapping("/api/users")
@@ -39,7 +42,15 @@ public class UserController {
             description = "HTTP Status OK")
     public ResponseEntity<AuthResponseDTO> loginUser(@Valid @RequestBody UserLoginDTO userLoginDTO){
         AuthResponseDTO authResponse = userService.loginUser(userLoginDTO);
-        return ResponseEntity.status(HttpStatus.OK).body(authResponse);
+        return ResponseEntity.status(HttpStatus.OK)
+                .header(JWT_HEADER)
+                .body(authResponse);
+    }
+
+    @RequestMapping("/user")
+    public ResponseEntity<UserResponse> getUserAfterLogin(Authentication auth){
+        UserResponse user = userService.getUserAfterLogin(auth);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
     @PutMapping("/{id}")

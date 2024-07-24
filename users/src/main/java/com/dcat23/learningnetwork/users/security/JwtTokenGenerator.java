@@ -1,47 +1,38 @@
 package com.dcat23.learningnetwork.users.security;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Component;
+import org.springframework.security.core.GrantedAuthority;
 
+import javax.crypto.SecretKey;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.stream.Collectors;
 
-@Component
+import static com.dcat23.learningnetwork.users.security.SecurityConstants.*;
+
 public class JwtTokenGenerator {
 
-    @Value("${jwt.secret}")
-    private String secret;
-
-    public String generateToken(Authentication auth) {
-        String email = (String) auth.getPrincipal();
-        Date expirationDate = new Date(System.currentTimeMillis() + SecurityConstants.JWT_EXPIRATION);
-
-        return Jwts.builder()
-                .setSubject(email)
-                .setIssuedAt(new Date())
-                .setExpiration(expirationDate) // 10 hours expiration
-                .signWith(SignatureAlgorithm.HS256, secret)
-                .compact();
+    public static String generateToken(Authentication auth, String jwtSecret) {
+        SecretKey secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+        return Jwts.builder().issuer(JWT_ISSUER).subject(auth.getName())
+                .claim(JWT_USERNAME_KEY, auth.getName())
+                .claim(JWT_AUTHORITY_KEY, extractAuthorities(auth))
+                .issuedAt(new Date())
+                .expiration(expiration())
+                .signWith(secretKey).compact();
     }
 
-    public Boolean validateToken(String token, String username) {
-        final String extractedUsername = extractUsername(token);
-        return (extractedUsername.equals(username) && !isTokenExpired(token));
+    private static Date expiration() {
+        long nowMillis = System.currentTimeMillis();
+        return new Date(nowMillis + JWT_TOKEN_EXPIRATION);
     }
 
-    public String extractUsername(String token) {
-        return extractAllClaims(token).getSubject();
-    }
-
-    private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
-    }
-
-    private Boolean isTokenExpired(String token) {
-        return extractAllClaims(token).getExpiration().before(new Date());
+    private static String extractAuthorities(Authentication auth) {
+        return auth.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(","));
     }
 }
 
