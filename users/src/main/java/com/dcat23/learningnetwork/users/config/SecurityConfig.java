@@ -28,7 +28,7 @@ public class SecurityConfig {
                                 "/api/users/login",
                                 "/api/users/register")
                         .permitAll()
-                        .anyRequest().permitAll())
+                        .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)

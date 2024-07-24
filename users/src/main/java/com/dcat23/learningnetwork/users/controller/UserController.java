@@ -25,9 +25,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserResponse> loginUser(@Valid @RequestBody UserLoginDTO userLoginDTO){
-        UserResponse user = userService.loginUser(userLoginDTO);
-        return ResponseEntity.status(HttpStatus.OK).body(user);
+    public ResponseEntity<String> loginUser(@Valid @RequestBody UserLoginDTO userLoginDTO){
+        userService.loginUser(userLoginDTO);
+        return ResponseEntity.status(HttpStatus.OK).body("Login Successful");
     }
 
     @PutMapping("/{id}")

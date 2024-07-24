@@ -9,7 +9,7 @@ public interface UserService {
 
     UserResponse registerUser(UserRegistrationDTO userDTO);
 
-    UserResponse loginUser(UserLoginDTO userLoginDTO);
+    void loginUser(UserLoginDTO userLoginDTO);
 
     UserResponse updateUser(UserUpdateDTO userUpdateDTO);
 }
