@@ -31,3 +31,5 @@ logging:
   level:
     root: warn
     com.dcat23: debug
+jwt:
+  secret: ${JWT_SECRET:"this is a pretty long secret"}

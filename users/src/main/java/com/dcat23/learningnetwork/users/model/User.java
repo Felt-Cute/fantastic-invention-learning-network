@@ -5,6 +5,9 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -26,11 +29,16 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "role")
-    private UserRole role;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(nullable = false, name = "roles")
+    private Set<Role> roles = new HashSet<>();
 
     @CreationTimestamp
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    public void addRoles(Role... role) {
+        this.roles.addAll(Arrays.asList(role));
+    }
 }

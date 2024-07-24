@@ -1,6 +1,6 @@
 package com.dcat23.learningnetwork.users.model;
 
-public enum UserRole {
+public enum Role {
     STUDENT,
     EDUCATOR,
     ADMIN

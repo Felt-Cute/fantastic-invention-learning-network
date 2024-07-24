@@ -29,5 +29,5 @@ Handles user registration, login, and profile management.
 - `username`
 - `email`
 - `password`
-- `role` (ENUM: 'student', 'educator')
+- `roles` (ENUM: 'student', 'educator', `admin`)
 - `created_at`

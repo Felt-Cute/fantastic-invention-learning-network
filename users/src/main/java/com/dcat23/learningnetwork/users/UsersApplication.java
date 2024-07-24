@@ -1,7 +1,7 @@
 package com.dcat23.learningnetwork.users;
 
+import com.dcat23.learningnetwork.users.model.Role;
 import com.dcat23.learningnetwork.users.model.User;
-import com.dcat23.learningnetwork.users.model.UserRole;
 import com.dcat23.learningnetwork.users.repository.UserRepository;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -59,7 +59,7 @@ public class UsersApplication {
         educator.setUsername("educator");
         educator.setPassword(password);
         educator.setEmail("educator@myself.com");
-        educator.setRole(UserRole.EDUCATOR);
+        educator.addRoles(Role.EDUCATOR);
         return educator;
     }
 
@@ -68,7 +68,7 @@ public class UsersApplication {
         student.setUsername("student");
         student.setPassword(password);
         student.setEmail("student@myself.com");
-        student.setRole(UserRole.STUDENT);
+        student.addRoles(Role.STUDENT);
         return student;
     }
 
@@ -77,7 +77,7 @@ public class UsersApplication {
         user.setUsername("dcat23");
         user.setPassword(password);
         user.setEmail("dcat@myself.com");
-        user.setRole(UserRole.ADMIN);
+        user.addRoles(Role.ADMIN);
         return user;
     }
 }
