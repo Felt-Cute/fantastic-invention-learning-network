@@ -107,6 +107,7 @@ cp .env.example .env
 `DATABASE_NAME`
 `DATABASE_PASSWORD`
 `DATABASE_USER`
+`JWT_SECRET`
 
 Start the services
 

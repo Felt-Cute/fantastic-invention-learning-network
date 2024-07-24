@@ -1,9 +1,9 @@
 server:
-  port: ${SERVER_PORT:8181}
+  port: 8181
 
 spring:
   application:
-    name: ${SPRING_APPLICATION_NAME:users}
+    name: users
   sql:
     init:
       mode: always
