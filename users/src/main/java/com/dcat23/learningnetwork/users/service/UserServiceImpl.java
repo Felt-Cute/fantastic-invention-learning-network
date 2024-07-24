@@ -1,6 +1,7 @@
 package com.dcat23.learningnetwork.users.service;
 
 import com.dcat23.learningnetwork.users.dto.*;
+import com.dcat23.learningnetwork.users.exception.UserNotFoundException;
 import com.dcat23.learningnetwork.users.mapper.UserMapper;
 import com.dcat23.learningnetwork.users.model.UserEntity;
 import com.dcat23.learningnetwork.users.repository.UserRepository;
@@ -51,5 +52,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse updateUser(UserUpdateDTO userUpdateDTO) {
         return null;
+    }
+
+    /**
+     * @param id the User id
+     * @return UserResponse with user details
+     */
+    @Override
+    public UserResponse getUserById(Long id) {
+        UserEntity user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
+        return UserMapper.mapToUserResponse(user);
     }
 }
