@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-public class GlobalAuthEntryPoint implements AuthenticationEntryPoint {
+public class GlobalAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     /**
      * Handles the authentication error by sending an unauthorized error response.

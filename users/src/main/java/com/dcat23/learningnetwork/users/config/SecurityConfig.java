@@ -1,14 +1,9 @@
 package com.dcat23.learningnetwork.users.config;
 
-import com.dcat23.learningnetwork.users.filter.JwtAuthenticationFilter;
-import com.dcat23.learningnetwork.users.security.CorsConfigurationSourceImpl;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.dcat23.learningnetwork.users.exception.GlobalAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -16,31 +11,32 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
-@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class SecurityConfig {
-
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .sessionManagement(sessionConfig -> sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .cors(corsConfig -> corsConfig.configurationSource(new CorsConfigurationSourceImpl()))
                 .authorizeHttpRequests(requests -> requests
                         .requestMatchers(
-                                HttpMethod.POST,
+                                "/api/users/user"
+                        ).authenticated()
+                        .requestMatchers(
+                                "/error",
                                 "/api/users/login",
                                 "/api/users/register")
-                        .permitAll()
-                        .anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
-                .formLogin(AbstractHttpConfigurer::disable);
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                        .permitAll());
+
+        http.cors(AbstractHttpConfigurer::disable);
+        http.csrf(AbstractHttpConfigurer::disable);
+        http.httpBasic(hbc -> hbc.authenticationEntryPoint(new GlobalAuthenticationEntryPoint()));
+        http.formLogin(AbstractHttpConfigurer::disable);
+        http.exceptionHandling(handler -> handler
+                .authenticationEntryPoint(new GlobalAuthenticationEntryPoint())
+        );
+
         return http.build();
     }
 
