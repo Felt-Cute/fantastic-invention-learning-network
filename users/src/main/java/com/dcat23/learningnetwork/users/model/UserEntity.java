@@ -31,7 +31,7 @@ public class UserEntity {
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(nullable = false, name = "roles")
+    @Column(name = "roles")
     private Set<Role> roles = new HashSet<>();
 
     @CreationTimestamp
@@ -39,6 +39,9 @@ public class UserEntity {
     private LocalDateTime createdAt;
 
     public void addRoles(Role... role) {
+        if (roles == null) {
+            roles = new HashSet<>();
+        }
         this.roles.addAll(Arrays.asList(role));
     }
 }

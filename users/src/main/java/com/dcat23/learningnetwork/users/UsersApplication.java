@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
@@ -36,6 +37,7 @@ import java.util.List;
         url = "https://github.com/Felt-Cute/fantastic-invention-learning-network"
     ))
 @SpringBootApplication
+@EnableWebSecurity(debug = true)
 public class UsersApplication {
 
     public static void main(String[] args) {
@@ -45,7 +47,7 @@ public class UsersApplication {
     @Bean
     public CommandLineRunner runner(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
-            String pwd = passwordEncoder.encode("password");
+            String pwd = passwordEncoder.encode("thisisabadpassword");
             UserEntity admin = createAdmin(pwd);
             UserEntity student = createStudent(pwd);
             UserEntity educator = createEducator(pwd);
@@ -58,7 +60,7 @@ public class UsersApplication {
         UserEntity educator = new UserEntity();
         educator.setUsername("educator");
         educator.setPassword(password);
-        educator.setEmail("educator@myself.com");
+        educator.setEmail("educator@filn.com");
         educator.addRoles(Role.EDUCATOR);
         return educator;
     }
@@ -67,7 +69,7 @@ public class UsersApplication {
         UserEntity student = new UserEntity();
         student.setUsername("student");
         student.setPassword(password);
-        student.setEmail("student@myself.com");
+        student.setEmail("student@filn.com");
         student.addRoles(Role.STUDENT);
         return student;
     }
@@ -76,7 +78,7 @@ public class UsersApplication {
         UserEntity user = new UserEntity();
         user.setUsername("dcat23");
         user.setPassword(password);
-        user.setEmail("dcat@myself.com");
+        user.setEmail("dcat@filn.com");
         user.addRoles(Role.ADMIN);
         return user;
     }

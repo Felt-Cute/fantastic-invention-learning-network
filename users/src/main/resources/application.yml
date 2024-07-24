@@ -29,7 +29,8 @@ springdoc:
     path: ${API_DOCS_PATH:/v3/api-docs}
 logging:
   level:
-    root: warn
+    root: error
     com.dcat23: debug
+    org.springframework.security: trace
 jwt:
   secret: ${JWT_SECRET:"this is a pretty long secret"}

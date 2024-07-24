@@ -1,21 +1,15 @@
 package com.dcat23.learningnetwork.users.exception;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.dcat23.mapper.ErrorMessageMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
-@Slf4j
 public class GlobalAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     /**
@@ -29,24 +23,13 @@ public class GlobalAuthenticationEntryPoint implements AuthenticationEntryPoint 
      */
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        log.error(authException.getClass().getSimpleName(), authException.getMessage());
-
         String path = request.getRequestURI();
         String message = (authException.getMessage() != null) ? authException.getMessage() : "Unauthorized";
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json;charset=utf-8");
         response.setHeader("filn-error-reason", "Authentication Failed");
-        String json = errorMessageJson(message, path);
+        String json = ErrorMessageMapper.mapToJson(message, path, HttpStatus.UNAUTHORIZED);
         response.getWriter().write(json);
     }
 
-    private static String errorMessageJson(String message, String path) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        Map<String, Object> map = new HashMap<>();
-        map.put("path", path);
-        map.put("message", message);
-        map.put("statusCode", HttpStatus.UNAUTHORIZED);
-        map.put("timestamp", LocalDateTime.now().toString());
-        return mapper.writeValueAsString(map);
-    }
 }

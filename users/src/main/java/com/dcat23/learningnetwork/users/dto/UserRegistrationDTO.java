@@ -15,7 +15,7 @@ public record UserRegistrationDTO(
         @NotBlank(message = "username must not be empty")
         String username,
 
-        @Schema(description = "email - must be unique", example = "contact@me.com")
+        @Schema(description = "email - must be unique", example = "contact@filn.com")
         @Email
         @NotBlank(message = "email must not be empty")
         String email,
