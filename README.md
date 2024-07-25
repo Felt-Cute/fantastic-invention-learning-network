@@ -267,7 +267,7 @@ docker compose up -d
     - [x] Create the database using PostgreSQL
     - [] Implement the database schema based on the defined tables for 
       - [x] users
-      - [] projects
+      - [x] projects
       - [] resources
       - [] discussions
       - [] messages
@@ -286,9 +286,9 @@ docker compose up -d
     - [x] Configure JWT (JSON Web Tokens) for secure API access
 
 5. **Develop Project Management Service**
-    - [] Create Project entity and repository
-    - [] Implement project creation, retrieval, updating, and deletion functionality
-    - [] Develop endpoints to manage project membership
+    - [x] Create Project entity and repository
+    - [x] Implement project creation, retrieval, updating, and deletion functionality
+    - [x] Develop endpoints to manage project membership
 
 6. **Develop Resource Management Service**
     - [] Create Resource entity and repository
