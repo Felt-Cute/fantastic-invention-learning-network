@@ -4,16 +4,21 @@ import com.dcat23.learningnetwork.users.dto.*;
 import com.dcat23.learningnetwork.users.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import static com.dcat23.learningnetwork.users.security.SecurityConstants.JWT_HEADER;
 
+@Tag(
+    name = "REST APIs for Users",
+    description = "REST APIs to CREATE, UPDATE, FETCH and Authenticate Users")
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -47,10 +52,13 @@ public class UserController {
                 .body(loginResponse);
     }
 
+    @GetMapping("/user")
     @Operation(
             summary = "Get User After Login",
             description = "REST API to FETCH authorized User details")
-    @GetMapping("/user")
+    @ApiResponse(
+            responseCode = "200",
+            description = "HTTP Status OK")
     public ResponseEntity<UserResponse> getUserAfterLogin(Authentication auth){
         UserResponse user = userService.getUserAfterLogin(auth);
         return ResponseEntity.status(HttpStatus.OK).body(user);
@@ -63,6 +71,7 @@ public class UserController {
     @ApiResponse(
             responseCode = "200",
             description = "HTTP Status OK")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UserResponse> updateUser(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO userUpdateDTO){
         UserResponse updatedUser = userService.updateUser(id, userUpdateDTO);
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);

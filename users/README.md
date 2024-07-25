@@ -19,13 +19,10 @@ Handles user registration, login, and profile management.
   - Retrieve authenticated user details.
 - `PUT /api/users/{id}`
     - Update user profile information.
-- `DELETE /api/users/{id} (admin)`
-    - Delete a user account (admin only).
 
 
 ## Database Schema
-
-### [Users](src%2Fmain%2Fjava%2Fcom%2Fdcat23%2Flearningnetwork%2Fusers%2Fmodel%2FUserEntity.java)
+### [Users](./src%2Fmain%2Fjava%2Fcom%2Fdcat23%2Flearningnetwork%2Fusers%2Fmodel%2FUserEntity.java)
 
 - `id` (Primary key)
 - `username`

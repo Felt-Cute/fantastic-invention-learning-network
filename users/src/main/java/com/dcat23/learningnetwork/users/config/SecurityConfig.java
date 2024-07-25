@@ -4,13 +4,16 @@ import com.dcat23.learningnetwork.users.exception.GlobalAccessDeniedHandler;
 import com.dcat23.learningnetwork.users.exception.GlobalAuthenticationEntryPoint;
 import com.dcat23.learningnetwork.users.filter.JwtTokenGeneratorFilter;
 import com.dcat23.learningnetwork.users.filter.JwtTokenValidatorFilter;
+import com.dcat23.learningnetwork.users.model.Role;
 import com.dcat23.learningnetwork.users.security.CorsConfigurationSourceImpl;
 import com.dcat23.learningnetwork.users.security.UsernamePwdAuthenticationProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -21,6 +24,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
+@EnableMethodSecurity
 public class SecurityConfig {
 
     @Bean
