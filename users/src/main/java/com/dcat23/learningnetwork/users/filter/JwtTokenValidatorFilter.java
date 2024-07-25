@@ -33,7 +33,6 @@ public class JwtTokenValidatorFilter extends OncePerRequestFilter {
      */
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
-        log.debug("VALIDATOR: doFilterInternal");
         String jwtToken = request.getHeader(JWT_HEADER);
         if (jwtToken != null) {
             try {
@@ -42,7 +41,6 @@ public class JwtTokenValidatorFilter extends OncePerRequestFilter {
                 Authentication authentication = JwtTokenGenerator.validateToken(jwtToken, secret);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } catch (Exception exception) {
-                log.error("EXCEPTION: {}, TOKEN: '{}'", exception.getMessage(), jwtToken);
                 throw new BadCredentialsException("Invalid token received", exception);
             }
         }
@@ -51,7 +49,6 @@ public class JwtTokenValidatorFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        log.debug("SERVLET PATH: {}", request.getRequestURI());
         return request.getServletPath().equals("/api/users/user");
     }
 }

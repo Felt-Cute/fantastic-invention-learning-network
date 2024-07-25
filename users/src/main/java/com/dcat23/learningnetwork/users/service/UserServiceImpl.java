@@ -36,11 +36,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public AuthResponseDTO loginUser(UserLoginDTO userLoginDTO) {
+    public LoginResponse loginUser(UserLoginDTO userLoginDTO) {
         Authentication auth = authenticateLogin(userLoginDTO);
         SecurityContextHolder.getContext().setAuthentication(auth);
         String token = JwtTokenGenerator.generateToken(auth, jwtSecret);
-        return new AuthResponseDTO(token);
+        return new LoginResponse(token);
     }
 
     private Authentication authenticateLogin(UserLoginDTO userLoginDTO) {

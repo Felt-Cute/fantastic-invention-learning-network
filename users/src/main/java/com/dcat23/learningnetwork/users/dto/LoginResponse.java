@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(
     name = "AuthResponse",
     description = "Schema to hold authentication token")
-public record AuthResponseDTO(
+public record LoginResponse(
         String accessToken
 ) {
 }

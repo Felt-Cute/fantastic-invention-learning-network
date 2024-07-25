@@ -30,22 +30,18 @@ public class JwtTokenGeneratorFilter extends OncePerRequestFilter {
      */
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
-        log.debug("GENERATOR: doFilterInternal");
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             Environment env = getEnvironment();
             String secret = env.getProperty(JWT_SECRET_KEY, JWT_SECRET_DEFAULT_VALUE);
             String jwtToken = JwtTokenGenerator.generateToken(auth, secret);
             response.setHeader(JWT_HEADER, jwtToken);
-        } else {
-            log.debug("JWT token is empty");
         }
         filterChain.doFilter(request, response);
     }
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        log.debug("servlet path: {}", request.getServletPath());
         return !request.getServletPath().equals("/api/users/user");
     }
 }

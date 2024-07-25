@@ -40,14 +40,17 @@ public class UserController {
     @ApiResponse(
             responseCode = "200",
             description = "HTTP Status OK")
-    public ResponseEntity<AuthResponseDTO> loginUser(@Valid @RequestBody UserLoginDTO userLoginDTO){
-        AuthResponseDTO authResponse = userService.loginUser(userLoginDTO);
+    public ResponseEntity<LoginResponse> loginUser(@Valid @RequestBody UserLoginDTO userLoginDTO){
+        LoginResponse authResponse = userService.loginUser(userLoginDTO);
         return ResponseEntity.status(HttpStatus.OK)
                 .header(JWT_HEADER)
                 .body(authResponse);
     }
 
-    @RequestMapping("/user")
+    @Operation(
+            summary = "Get User After Login",
+            description = "REST API to FETCH authorized User details")
+    @GetMapping("/user")
     public ResponseEntity<UserResponse> getUserAfterLogin(Authentication auth){
         UserResponse user = userService.getUserAfterLogin(auth);
         return ResponseEntity.status(HttpStatus.OK).body(user);

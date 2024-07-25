@@ -7,7 +7,7 @@ public interface UserService {
 
     UserResponse registerUser(UserRegistrationDTO userDTO);
 
-    AuthResponseDTO loginUser(UserLoginDTO userLoginDTO);
+    LoginResponse loginUser(UserLoginDTO userLoginDTO);
 
     UserResponse updateUser(UserUpdateDTO userUpdateDTO);
 
