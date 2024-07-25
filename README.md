@@ -117,17 +117,17 @@ docker compose up -d
 ---
 ## [API Reference](http://localhost:8080/swagger-ui.html)
 
-### [User Management Service](http://localhost:8080/swagger-ui.html)
-- ``POST /api/users/register``
-  - Register a new user (student or educator).
+### [User Management Service](http://localhost:8181/swagger-ui.html)
+- `POST /api/users/register`
+    - Register a new user (student or educator).
 - `POST /api/users/login`
-  - Authenticate a user and return an authentication token.
+    - Authenticate a user and return an authentication token.
 - `GET /api/users/{id}`
-  - Retrieve user profile details by user ID.
-- `PUT /api/users/{id}`
-  - Update user profile information.
-- `DELETE /api/users/{id} (admin)`
-   - Delete a user account (admin only).
+    - Retrieve user profile details by user ID.
+- `GET /api/users/user`
+    - Retrieve authenticated user details.
+- `PUT /api/users/{id}` (admin)
+    - Update user profile information (admin only).
 
 ### [Project Management Service](http://localhost:8080/swagger-ui.html)
 - `POST /api/projects`
@@ -193,12 +193,12 @@ docker compose up -d
 
 ### [User Management Service](./users/README.md#database-schema)
 
-#### [Users]()
+#### [Users](users%2Fsrc%2Fmain%2Fjava%2Fcom%2Fdcat23%2Flearningnetwork%2Fusers%2Fmodel%2FUserEntity.java)
 - `id` (Primary key)
 - `username`
-- `email`
+- `email` (unique)
 - `password`
-- `role` (ENUM: 'student', 'educator')
+- `roles` (ENUM: 'student', 'educator', `admin`)
 - `created_at`
 
 ### [Project Management Service](Projects/README.md#database-schema)
@@ -264,20 +264,26 @@ docker compose up -d
     - [x] Configure the project structure and dependencies (e.g., Spring Web, Spring Data JPA, Spring Security)
 
 2. **Design the Database Schema**
-    - [] Create the database using PostgreSQL or another relational database
-    - [] Implement the database schema based on the defined tables for users, projects, resources, discussions, messages, and notifications
+    - [x] Create the database using PostgreSQL
+    - [] Implement the database schema based on the defined tables for 
+      - [x] users
+      - [] projects
+      - [] resources
+      - [] discussions
+      - [] messages
+      - [] notifications
     - [] Set up JPA entities corresponding to each table
 
 3. **Implement User Management Service**
-    - [] Create User entity and repository
-    - [] Implement user registration and login functionality
-    - [] Develop user profile management features
-    - [] Set up password hashing and validation
+    - [x] Create User entity and repository
+    - [x] Implement user registration and login functionality
+    - [x] Develop user profile management features
+    - [x] Set up password hashing and validation
 
 4. **Implement User Authentication and Authorization**
-    - [] Set up Spring Security for authentication
-    - [] Implement role-based access control (e.g., student, educator, admin)
-    - [] Configure JWT (JSON Web Tokens) for secure API access
+    - [x] Set up Spring Security for authentication
+    - [x] Implement role-based access control (e.g., student, educator, admin)
+    - [x] Configure JWT (JSON Web Tokens) for secure API access
 
 5. **Develop Project Management Service**
     - [] Create Project entity and repository

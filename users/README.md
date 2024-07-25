@@ -17,16 +17,15 @@ Handles user registration, login, and profile management.
     - Retrieve user profile details by user ID.
 - `GET /api/users/user`
   - Retrieve authenticated user details.
-- `PUT /api/users/{id}`
-    - Update user profile information.
+- `PUT /api/users/{id}` (admin)
+    - Update user profile information (admin only).
 
 
 ## Database Schema
-### [Users](./src%2Fmain%2Fjava%2Fcom%2Fdcat23%2Flearningnetwork%2Fusers%2Fmodel%2FUserEntity.java)
-
+### [Users](src%2Fmain%2Fjava%2Fcom%2Fdcat23%2Flearningnetwork%2Fusers%2Fmodel%2FUserEntity.java)
 - `id` (Primary key)
 - `username`
-- `email`
+- `email` (unique)
 - `password`
 - `roles` (ENUM: 'student', 'educator', `admin`)
 - `created_at`
