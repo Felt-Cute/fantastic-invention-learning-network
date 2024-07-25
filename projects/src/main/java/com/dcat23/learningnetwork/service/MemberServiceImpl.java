@@ -2,14 +2,12 @@ package com.dcat23.learningnetwork.service;
 
 import com.dcat23.learningnetwork.exception.AlreadyAddedException;
 import com.dcat23.learningnetwork.exception.MemberNotFoundException;
-import com.dcat23.learningnetwork.exception.ProjectException;
 import com.dcat23.learningnetwork.exception.ProjectNotFoundException;
+import com.dcat23.learningnetwork.model.Member;
 import com.dcat23.learningnetwork.model.Project;
 import com.dcat23.learningnetwork.repository.ProjectRepository;
-import com.dcat23.learningnetwork.model.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -65,7 +63,8 @@ public class MemberServiceImpl implements MemberService {
      * @return list of Projects associated to a Member id
      */
     @Override
-    public List<Member> getAllMemberProjects(Long memberId) {
-        return List.of();
+    public List<Project> getAllMemberProjects(Long memberId) {
+        return projectRepository.
+                findAllByMemberIdsContaining(memberId);
     }
 }

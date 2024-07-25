@@ -1,6 +1,7 @@
 package com.dcat23.learningnetwork.controller;
 
 import com.dcat23.learningnetwork.model.Member;
+import com.dcat23.learningnetwork.model.Project;
 import com.dcat23.learningnetwork.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,8 @@ public class MemberController {
     }
 
     @GetMapping("/{memberId}")
-    public ResponseEntity<List<Member>> getAllMemberProjects(@PathVariable Long memberId){
-        List<Member> members = memberService.getAllMemberProjects(memberId);
-        return ResponseEntity.status(HttpStatus.OK).body(members);
+    public ResponseEntity<List<Project>>projects(@PathVariable Long memberId){
+        List<Project> projects = memberService.getAllMemberProjects(memberId);
+        return ResponseEntity.status(HttpStatus.OK).body(projects);
     }
 }
