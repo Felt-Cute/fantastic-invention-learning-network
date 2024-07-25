@@ -130,16 +130,23 @@ docker compose up -d
     - Update user profile information (admin only).
 
 ### [Project Management Service](http://localhost:8080/swagger-ui.html)
+
 - `POST /api/projects`
-  - Create a new project.
+    - Create a new project.
 - `GET /api/projects/{projectId}`
-  - Retrieve details of a specific project.
-- `GET /api/projects/user/{userId}`
-  - Get a list of projects associated with a specific user.
+    - Retrieve details of a specific project.
+- `GET /api/projects/member/{memberId}`
+    - Get a list of projects associated with a specific member.
 - `PUT /api/projects/{projectId}`
-  - Update project details.
-- `DELETE /api/projects/{projectId} (admin)`
-   - Delete a project (admin only).
+    - Update project details.
+- `DELETE /api/projects/{projectId}` (owner)
+    - Delete a project (owner only).
+- `POST /api/members/add`
+    - Add member to a project.
+- `DELETE /api/members/remove`
+    - Remove a member from a project.
+- `GET /api/members/{memberId}`
+    - Get a list of Projects associated with a member id.
 
 ### [Resource Management Service](http://localhost:8080/swagger-ui.html)
 - `POST /api/resources`
@@ -203,7 +210,7 @@ docker compose up -d
 
 ### [Project Management Service](Projects/README.md#database-schema)
 
-#### [Projects]()
+#### [Projects](projects%2Fsrc%2Fmain%2Fjava%2Fcom%2Fdcat23%2Flearningnetwork%2Fmodel%2FProject.java)
 - `id` (Primary key)
 - `title`
 - `description`
@@ -267,7 +274,7 @@ docker compose up -d
     - [x] Create the database using PostgreSQL
     - [] Implement the database schema based on the defined tables for 
       - [x] users
-      - [] projects
+      - [x] projects
       - [] resources
       - [] discussions
       - [] messages
@@ -286,9 +293,9 @@ docker compose up -d
     - [x] Configure JWT (JSON Web Tokens) for secure API access
 
 5. **Develop Project Management Service**
-    - [] Create Project entity and repository
-    - [] Implement project creation, retrieval, updating, and deletion functionality
-    - [] Develop endpoints to manage project membership
+    - [x] Create Project entity and repository
+    - [x] Implement project creation, retrieval, updating, and deletion functionality
+    - [x] Develop endpoints to manage project membership
 
 6. **Develop Resource Management Service**
     - [] Create Resource entity and repository
