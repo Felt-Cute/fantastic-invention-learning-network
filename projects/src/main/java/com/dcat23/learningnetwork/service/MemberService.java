@@ -10,4 +10,6 @@ public interface MemberService {
     Member removeMemberFromProject(Long projectId, Long memberId);
 
     List<Member> getAllMemberProjects(Long memberId);
+
+    Member getMemberById(Long id);
 }

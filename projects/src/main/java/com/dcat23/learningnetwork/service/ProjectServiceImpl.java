@@ -1,21 +1,39 @@
 package com.dcat23.learningnetwork.service;
 
+import com.dcat23.learningnetwork.ProjectRepository;
 import com.dcat23.learningnetwork.dto.ProjectCreationDTO;
 import com.dcat23.learningnetwork.dto.ProjectResponse;
 import com.dcat23.learningnetwork.dto.ProjectUpdateDTO;
+import com.dcat23.learningnetwork.exception.ProjectNotFoundException;
+import com.dcat23.learningnetwork.mapper.ProjectMapper;
+import com.dcat23.learningnetwork.model.Member;
+import com.dcat23.learningnetwork.model.Project;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class ProjectServiceImpl implements ProjectService {
+
+    private final ProjectRepository projectRepository;
+    private final MemberService memberService;
+
     /**
      * @param id the projectId
      * @return the Project
      */
     @Override
     public ProjectResponse getProjectWithDetails(Long id) {
-        return null;
+        Project project = findById(id);
+        return ProjectMapper.mapToProjectResponse(project);
+    }
+
+    private Project findById(Long id) {
+        return projectRepository.findById(id)
+                .orElseThrow(() -> new ProjectNotFoundException(id));
     }
 
     /**
@@ -24,7 +42,11 @@ public class ProjectServiceImpl implements ProjectService {
      */
     @Override
     public ProjectResponse createProject(ProjectCreationDTO projectDTO) {
-        return null;
+        Project project = ProjectMapper.mapFromProjectCreationDTO(projectDTO);
+        Member owner = memberService.getMemberById(projectDTO.ownerId());
+        project.setOwnerId(owner.id());
+        Project saved = projectRepository.save(project);
+        return ProjectMapper.mapToProjectResponse(saved);
     }
 
     /**
@@ -42,7 +64,8 @@ public class ProjectServiceImpl implements ProjectService {
      */
     @Override
     public void deleteProject(Long id) {
-
+        Project project = findById(id);
+        projectRepository.delete(project);
     }
 
     /**
@@ -50,6 +73,8 @@ public class ProjectServiceImpl implements ProjectService {
      */
     @Override
     public List<ProjectResponse> getAllProjects() {
-        return List.of();
+        return projectRepository.findAll().stream()
+                .map(ProjectMapper::mapToProjectResponse)
+                .toList();
     }
 }

@@ -21,6 +21,11 @@ spring:
     password: ${DATABASE_PASSWORD:password}
     username: ${DATABASE_USER:default}
     driver-class-name: org.postgresql.Driver
+  security:
+    user:
+      name: ${DEFAULT_USER_NAME:name}
+      password: ${DEFAULT_USER_PASSWORD:password}
+
 
 springdoc:
   swagger-ui:
@@ -29,9 +34,9 @@ springdoc:
     path: ${API_DOCS_PATH:/v3/api-docs}
 logging:
   level:
-    root: error
-    com.dcat23: debug
-
+    root: ${ROOT_LOGGING_LEVEL:warn}
+    com.dcat23: ${PROJECT_LOGGING_LEVEL:warn}
+    org.springframework.security: ${SECURITY_LOGGING_LEVEL:warn}
 service:
   user:
     url: ${USER_SERVICE_URL:localhost:8181}
