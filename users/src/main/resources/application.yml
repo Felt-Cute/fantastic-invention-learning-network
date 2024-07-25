@@ -1,0 +1,36 @@
+server:
+  port: 8181
+
+spring:
+  application:
+    name: users
+  sql:
+    init:
+      mode: always
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: ${DEFAULT_SCHEMA:users}
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+  datasource:
+    url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:learning_network}
+    password: ${DATABASE_PASSWORD:password}
+    username: ${DATABASE_USER:default}
+    driver-class-name: org.postgresql.Driver
+
+springdoc:
+  swagger-ui:
+    path: ${SWAGGER_UI_PATH:/swagger-ui.html}
+  api-docs:
+    path: ${API_DOCS_PATH:/v3/api-docs}
+logging:
+  level:
+    root: error
+    com.dcat23: debug
+    org.springframework.security: ${SECURITY_LOGGING_LEVEL:warn}
+jwt:
+  secret: ${JWT_SECRET:"this is a pretty long secret but it could be longer"}
