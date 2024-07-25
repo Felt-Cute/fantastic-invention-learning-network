@@ -24,16 +24,12 @@ Manages creation, retrieval, updating, and deletion of projects.
   - Add member to a project.
 - `DELETE /api/members/remove`
   - Remove a member from a project.
-- `GET /api/members/{projectId}`
-  - Get a list of members associated with a specific project.
-- `PUT /api/projects/{projectId}`
-  - Update project details.
-- `DELETE /api/projects/{projectId}` (owner)
-  - Delete a project (owner only).
+- `GET /api/members/{memberId}`
+  - Get a list of Projects associated with a member id.
 
 ## Database Schema
 
-[Projects]()
+[Projects](src%2Fmain%2Fjava%2Fcom%2Fdcat23%2Flearningnetwork%2Fmodel%2FProject.java)
 - `id` (Primary key)
 - `title` 
 - `description`
