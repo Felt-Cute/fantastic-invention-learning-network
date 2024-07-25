@@ -50,7 +50,7 @@ academic growth and engagement.
 - **Functionality**: Handles user registration, login, and profile management.
 - **Core Features**: User authentication and authorization, role-based access control, password management.
 
-### Project Management Service
+### [Project Management Service](projects/README.md)
 - **Functionality**: Manages creation, retrieval, updating, and deletion of projects.
 - **Core Features**: Project collaboration, membership management, and project details retrieval.
 
