@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,14 +39,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public LoginResponse loginUser(UserLoginDTO userLoginDTO) {
         Authentication auth = authenticateLogin(userLoginDTO);
-        SecurityContextHolder.getContext().setAuthentication(auth);
+        if (auth == null || !auth.isAuthenticated()) {
+            throw new BadCredentialsException("Username or password is incorrect");
+        }
         String token = JwtTokenGenerator.generateToken(auth, jwtSecret);
         return new LoginResponse(token);
     }
 
     private Authentication authenticateLogin(UserLoginDTO userLoginDTO) {
         return authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
+                UsernamePasswordAuthenticationToken.unauthenticated(
                         userLoginDTO.email(),
                         userLoginDTO.password()
                 )

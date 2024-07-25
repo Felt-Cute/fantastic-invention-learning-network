@@ -41,10 +41,10 @@ public class UserController {
             responseCode = "200",
             description = "HTTP Status OK")
     public ResponseEntity<LoginResponse> loginUser(@Valid @RequestBody UserLoginDTO userLoginDTO){
-        LoginResponse authResponse = userService.loginUser(userLoginDTO);
+        LoginResponse loginResponse = userService.loginUser(userLoginDTO);
         return ResponseEntity.status(HttpStatus.OK)
-                .header(JWT_HEADER)
-                .body(authResponse);
+                .header(JWT_HEADER, loginResponse.accessToken())
+                .body(loginResponse);
     }
 
     @Operation(
