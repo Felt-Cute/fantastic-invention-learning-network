@@ -31,3 +31,7 @@ logging:
   level:
     root: error
     com.dcat23: debug
+
+service:
+  user:
+    url: ${USER_SERVICE_URL:localhost:8181}

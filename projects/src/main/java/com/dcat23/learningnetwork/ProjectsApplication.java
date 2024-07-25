@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @OpenAPIDefinition(
     info = @Info(
@@ -28,6 +29,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
         url = "https://github.com/Felt-Cute/fantastic-invention-learning-network"
     ))
 @SpringBootApplication
+@EnableFeignClients
 public class ProjectsApplication {
     public static void main(String[] args) {
         SpringApplication.run(ProjectsApplication.class, args);

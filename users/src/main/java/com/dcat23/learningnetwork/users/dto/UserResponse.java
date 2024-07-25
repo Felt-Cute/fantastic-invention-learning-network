@@ -3,6 +3,7 @@ package com.dcat23.learningnetwork.users.dto;
 import com.dcat23.learningnetwork.users.model.Role;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.io.Serializable;
 import java.util.Set;
 
 @Schema(
@@ -16,5 +17,5 @@ public record UserResponse(
         String email,
 
         Set<Role> roles
-) {
+) implements Serializable {
 }
