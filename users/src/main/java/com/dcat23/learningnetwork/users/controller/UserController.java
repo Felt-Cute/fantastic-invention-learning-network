@@ -63,8 +63,8 @@ public class UserController {
     @ApiResponse(
             responseCode = "200",
             description = "HTTP Status OK")
-    public ResponseEntity<UserResponse> updateUser(@Valid @RequestBody UserUpdateDTO userUpdateDTO){
-        UserResponse updatedUser = userService.updateUser(userUpdateDTO);
+    public ResponseEntity<UserResponse> updateUser(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO userUpdateDTO){
+        UserResponse updatedUser = userService.updateUser(id, userUpdateDTO);
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
 

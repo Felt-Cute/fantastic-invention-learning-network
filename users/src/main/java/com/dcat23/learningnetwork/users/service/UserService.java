@@ -9,7 +9,7 @@ public interface UserService {
 
     LoginResponse loginUser(UserLoginDTO userLoginDTO);
 
-    UserResponse updateUser(UserUpdateDTO userUpdateDTO);
+    UserResponse updateUser(Long id, UserUpdateDTO userUpdateDTO);
 
     UserResponse getUserById(Long id);
 

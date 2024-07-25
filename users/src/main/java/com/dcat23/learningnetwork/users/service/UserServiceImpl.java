@@ -13,7 +13,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -56,8 +55,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse updateUser(UserUpdateDTO userUpdateDTO) {
-        return null;
+    public UserResponse updateUser(Long id, UserUpdateDTO userUpdateDTO) {
+        UserEntity user = findById(id);
+        UserMapper.mapFromUserUpdateDTO(userUpdateDTO, user);
+        UserEntity saved = userRepository.save(user);
+        return UserMapper.mapToUserResponse(saved);
     }
 
     /**
@@ -66,9 +68,13 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserResponse getUserById(Long id) {
-        UserEntity user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
+        UserEntity user = findById(id);
         return UserMapper.mapToUserResponse(user);
+    }
+
+    private UserEntity findById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     /**

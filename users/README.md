@@ -15,6 +15,8 @@ Handles user registration, login, and profile management.
     - Authenticate a user and return an authentication token.
 - `GET /api/users/{id}`
     - Retrieve user profile details by user ID.
+- `GET /api/users/user`
+  - Retrieve authenticated user details.
 - `PUT /api/users/{id}`
     - Update user profile information.
 - `DELETE /api/users/{id} (admin)`
