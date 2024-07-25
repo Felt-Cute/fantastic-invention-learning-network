@@ -20,7 +20,6 @@ import java.util.Objects;
 public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
-    private final MemberService memberService;
     private final UserServiceClient userServiceClient;
 
     /**
@@ -45,7 +44,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public ProjectResponse createProject(ProjectCreationDTO projectDTO) {
         Project project = ProjectMapper.mapFromProjectCreationDTO(projectDTO);
-        Member owner = memberService.getMemberById(projectDTO.ownerId());
+        Member owner = userServiceClient.getMemberById(projectDTO.ownerId());
         project.setOwnerId(owner.id());
         Project saved = projectRepository.save(project);
         return ProjectMapper.mapToProjectResponse(saved);

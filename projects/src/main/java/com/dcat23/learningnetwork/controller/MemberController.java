@@ -24,11 +24,11 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.CREATED).body(member);
     }
 
-    @PostMapping("/remove")
+    @DeleteMapping("/remove")
     public ResponseEntity<Member>removeMemberFromProject(@RequestParam Long projectId,
                                                        @RequestParam Long memberId) {
-        Member member = memberService.removeMemberFromProject(projectId, memberId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(member);
+        memberService.removeMemberFromProject(projectId, memberId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @GetMapping("/{memberId}")

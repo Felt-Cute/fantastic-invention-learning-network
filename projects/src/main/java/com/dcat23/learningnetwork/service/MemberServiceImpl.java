@@ -1,5 +1,7 @@
 package com.dcat23.learningnetwork.service;
 
+import com.dcat23.learningnetwork.exception.ProjectNotFoundException;
+import com.dcat23.learningnetwork.model.Project;
 import com.dcat23.learningnetwork.repository.ProjectRepository;
 import com.dcat23.learningnetwork.model.Member;
 import lombok.RequiredArgsConstructor;
@@ -28,11 +30,16 @@ public class MemberServiceImpl implements MemberService {
     /**
      * @param projectId the Project id
      * @param memberId  the Member id
-     * @return the REMOVED Member
      */
     @Override
-    public Member removeMemberFromProject(Long projectId, Long memberId) {
-        return null;
+    public void removeMemberFromProject(Long projectId, Long memberId) {
+        Project project = findProjectById(projectId);
+        project.getMemberIds().remove(memberId);
+    }
+
+    private Project findProjectById(Long projectId) {
+        return projectRepository.findById(projectId)
+                .orElseThrow(() -> new ProjectNotFoundException(projectId));
     }
 
     /**
@@ -42,15 +49,5 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public List<Member> getAllMemberProjects(Long memberId) {
         return List.of();
-    }
-
-    /**
-     * @param id the Member id
-     * @return Member
-     */
-    @Override
-    public Member getMemberById(Long id) {
-        Member memberById = userServiceClient.getMemberById(id);
-        return memberById;
     }
 }

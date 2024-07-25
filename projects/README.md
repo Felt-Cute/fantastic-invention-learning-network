@@ -22,7 +22,7 @@ Manages creation, retrieval, updating, and deletion of projects.
     - Delete a project (owner only).
 - `POST /api/members/add`
   - Add member to a project.
-- `POST /api/members/remove`
+- `DELETE /api/members/remove`
   - Remove a member from a project.
 - `GET /api/members/{projectId}`
   - Get a list of members associated with a specific project.

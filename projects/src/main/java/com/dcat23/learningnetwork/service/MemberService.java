@@ -7,9 +7,7 @@ import java.util.List;
 public interface MemberService {
     Member addMemberToProject(Long projectId, Long memberId);
 
-    Member removeMemberFromProject(Long projectId, Long memberId);
+    void removeMemberFromProject(Long projectId, Long memberId);
 
     List<Member> getAllMemberProjects(Long memberId);
-
-    Member getMemberById(Long id);
 }
