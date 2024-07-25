@@ -19,6 +19,6 @@ public class AuthService {
     public void authenticate(LoginRequest loginRequest) {
         LoginResponse jwtResponse = userService.login(loginRequest);
         jwtToken.setToken(jwtResponse.accessToken());
-        log.debug("Authentication successful");
+        log.debug("✅Authenticated: {}", loginRequest.email());
     }
 }

@@ -2,6 +2,7 @@ package com.dcat23.learningnetwork.mapper;
 
 import com.dcat23.learningnetwork.dto.ProjectCreationDTO;
 import com.dcat23.learningnetwork.dto.ProjectResponse;
+import com.dcat23.learningnetwork.dto.ProjectUpdateDTO;
 import com.dcat23.learningnetwork.model.Project;
 
 public class ProjectMapper {
@@ -20,5 +21,17 @@ public class ProjectMapper {
         project.setTitle(projectDTO.title());
         project.setDescription(projectDTO.description());
         return project;
+    }
+
+    public static void mapFromProjectUpdateDTO(ProjectUpdateDTO projectDTO, Project project) {
+        if (project == null || projectDTO == null) return;
+
+        if (projectDTO.title() != null) {
+            project.setTitle(projectDTO.title());
+        }
+        if (projectDTO.description() != null) {
+            project.setDescription(projectDTO.description());
+        }
+
     }
 }

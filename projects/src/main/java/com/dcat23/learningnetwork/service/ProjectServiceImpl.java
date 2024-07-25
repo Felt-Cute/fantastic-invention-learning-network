@@ -1,6 +1,6 @@
 package com.dcat23.learningnetwork.service;
 
-import com.dcat23.learningnetwork.ProjectRepository;
+import com.dcat23.learningnetwork.repository.ProjectRepository;
 import com.dcat23.learningnetwork.dto.ProjectCreationDTO;
 import com.dcat23.learningnetwork.dto.ProjectResponse;
 import com.dcat23.learningnetwork.dto.ProjectUpdateDTO;
@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -20,6 +21,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
     private final MemberService memberService;
+    private final UserServiceClient userServiceClient;
 
     /**
      * @param id the projectId
@@ -56,7 +58,22 @@ public class ProjectServiceImpl implements ProjectService {
      */
     @Override
     public ProjectResponse updateProject(Long id, ProjectUpdateDTO projectDTO) {
-        return null;
+        Project project = findById(id);
+        updateOwner(project, projectDTO);
+        ProjectMapper.mapFromProjectUpdateDTO(projectDTO, project);
+        Project saved = projectRepository.save(project);
+        return ProjectMapper.mapToProjectResponse(saved);
+    }
+
+    private void updateOwner(Project project, ProjectUpdateDTO projectDTO) {
+        if (projectDTO.ownerId() == null) return;
+        if (!Objects.equals(project.getOwnerId(), projectDTO.ownerId())) {
+            Member memberById = userServiceClient.getMemberById(projectDTO.ownerId());
+            if (memberById != null) {
+                project.setOwnerId(memberById.id());
+            }
+        }
+
     }
 
     /**

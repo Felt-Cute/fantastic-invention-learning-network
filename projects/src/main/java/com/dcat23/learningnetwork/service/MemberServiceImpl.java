@@ -1,6 +1,6 @@
 package com.dcat23.learningnetwork.service;
 
-import com.dcat23.learningnetwork.ProjectRepository;
+import com.dcat23.learningnetwork.repository.ProjectRepository;
 import com.dcat23.learningnetwork.model.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
