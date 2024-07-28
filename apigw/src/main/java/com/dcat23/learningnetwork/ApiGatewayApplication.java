@@ -6,6 +6,8 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDateTime;
+
 @SpringBootApplication
 public class ApiGatewayApplication {
     public static void main(String[] args) {
@@ -17,11 +19,15 @@ public class ApiGatewayApplication {
         return builder.routes()
                 .route(p -> p
                         .path("/filn/users/**")
-                        .filters(f -> f.rewritePath("/filn/users/(?<segment>.*)", "/api/users/${segment}"))
+                        .filters(f -> f.rewritePath("/filn/users/(?<segment>.*)", "/${segment}")
+                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+                                .prefixPath("/api/users"))
                         .uri("lb://USERS"))
                 .route(p -> p
                         .path("/filn/projects/**")
-                        .filters(f -> f.rewritePath("/filn/projects/(?<segment>.*)", "/api/projects/${segment}"))
+                        .filters(f -> f.rewritePath("/filn/projects/(?<segment>.*)", "/${segment}")
+                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+                                .prefixPath("/api/projects"))
                         .uri("lb://PROJECTS"))
                 .build();
 
