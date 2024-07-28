@@ -22,6 +22,7 @@
         <module>projects</module>
         <module>users</module>
         <module>discovery</module>
+        <module>apigw</module>
     </modules>
 
     <url/>
