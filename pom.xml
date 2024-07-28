@@ -20,6 +20,7 @@
     <modules>
         <module>core</module>
         <module>projects</module>
+        <module>users</module>
     </modules>
 
     <url/>
@@ -44,7 +45,7 @@
         <spring.boot.version>3.3.2</spring.boot.version>
         <spring.cloud.version>2023.0.2</spring.cloud.version>
         <spring.cloud.gateway.version>4.1.5</spring.cloud.gateway.version>
-        <image>macchiato23/learning-network-${project.artifactId}:${project.version}</image>
+        <image>macchiato23/filn-${project.artifactId}:${project.version}</image>
     </properties>
 
     <dependencyManagement>
