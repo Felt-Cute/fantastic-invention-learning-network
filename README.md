@@ -115,7 +115,7 @@ Start the services
 docker compose up -d
 ```
 ---
-## [API Reference](http://localhost:8080/swagger-ui.html)
+## [API Reference](http://localhost:8080/actuator/gateway/routes)
 
 ### [User Management Service](http://localhost:8181/swagger-ui.html)
 - `POST /api/users/register`

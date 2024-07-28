@@ -8,7 +8,8 @@ spring:
     gateway:
       discovery:
         locator:
-          enabled: true
+          enabled: false
+          lower-case-service-id: true
 
 eureka:
   client:
