@@ -14,7 +14,7 @@ By enhancing peer learning and networking, the application aims to create a supp
 academic growth and engagement.
 
 ---
-## Technical Stack
+`## Technical Stack
 
 ### Frontend
 - **Framework**: React or Angular for building a dynamic user interface.
@@ -22,12 +22,12 @@ academic growth and engagement.
 
 ### Backend
 - **Framework**: Spring Boot for the backend RESTful API.
-- **Database**: PostgreSQL or MongoDB for storing user data, resources, and discussions.
+- **Database**: PostgreSQL for storing user data, resources, and discussions.
 - **Authentication**: Use Spring Security for user authentication and authorization.
 
 ### Hosting and Deployment
 - **Cloud Provider**: AWS, Heroku, or DigitalOcean for hosting the application.
-- **Containerization**: Docker for containerizing the application for easier deployment and scalability.
+- **Containerization**: Docker for containerizing the application for easier deployment and scalability.`
 
 ---
 ## Core Features
@@ -351,7 +351,6 @@ docker compose up -d
     - [] Write user guides and technical documentation for future development
 
 ---
-
 ## Additional Considerations
 - **Data Privacy**: Ensure compliance with data protection regulations (e.g., GDPR, FERPA).
 - **Accessibility**: Implement features to support users with disabilities (e.g., screen reader compatibility).

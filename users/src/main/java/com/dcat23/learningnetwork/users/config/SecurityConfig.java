@@ -49,8 +49,8 @@ public class SecurityConfig {
 
         http.cors(corsConfig -> corsConfig.configurationSource(new CorsConfigurationSourceImpl()));
         http.csrf(AbstractHttpConfigurer::disable);
-        http.httpBasic(hbc -> hbc.authenticationEntryPoint(new GlobalAuthenticationEntryPoint()));
         http.formLogin(AbstractHttpConfigurer::disable);
+        http.httpBasic(hbc -> hbc.authenticationEntryPoint(new GlobalAuthenticationEntryPoint()));
         http.exceptionHandling(handler -> handler
                 .authenticationEntryPoint(new GlobalAuthenticationEntryPoint())
                 .accessDeniedHandler(new GlobalAccessDeniedHandler())
