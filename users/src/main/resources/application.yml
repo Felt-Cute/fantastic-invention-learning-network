@@ -34,3 +34,8 @@ logging:
     org.springframework.security: ${SECURITY_LOGGING_LEVEL:warn}
 jwt:
   secret: ${JWT_SECRET:"this is a pretty long secret but it could be longer"}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL:http://localhost:8761/eureka}

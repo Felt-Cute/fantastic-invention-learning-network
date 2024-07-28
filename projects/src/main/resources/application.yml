@@ -26,7 +26,6 @@ spring:
       name: ${DEFAULT_USER_NAME:name}
       password: ${DEFAULT_USER_PASSWORD:password}
 
-
 springdoc:
   swagger-ui:
     path: ${SWAGGER_UI_PATH:/swagger-ui.html}
@@ -37,6 +36,7 @@ logging:
     root: ${ROOT_LOGGING_LEVEL:warn}
     com.dcat23: ${PROJECT_LOGGING_LEVEL:warn}
     org.springframework.security: ${SECURITY_LOGGING_LEVEL:warn}
-service:
-  user:
-    url: ${USER_SERVICE_URL:localhost:8181}
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICE_URL:http://localhost:8761/eureka}
