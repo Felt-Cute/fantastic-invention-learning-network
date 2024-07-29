@@ -54,7 +54,7 @@ academic growth and engagement.
 - **Functionality**: Manages creation, retrieval, updating, and deletion of projects.
 - **Core Features**: Project collaboration, membership management, and project details retrieval.
 
-### Resource Management Service
+### [Resource Management Service](resources/README.md)
 - **Functionality**: Facilitates uploading, accessing, and managing educational resources.
 - **Core Features**: Resource sharing, categorization, and retrieval based on project association.
 
@@ -219,7 +219,7 @@ docker compose up -d
 
 ### [Resource Management Service](Resources/README.md#database-schema)
 
-#### [Resources]()
+#### [Resources](resources%2Fsrc%2Fmain%2Fjava%2Fcom%2Fdcat23%2Flearningnetwork%2Fmodel%2FResource.java)
 - `id` (Primary key)
 - `project_id` (Foreign key referencing projects.id)
 - `title`
@@ -298,7 +298,7 @@ docker compose up -d
     - [x] Develop endpoints to manage project membership
 
 6. **Develop Resource Management Service**
-    - [] Create Resource entity and repository
+    - [x] Create Resource entity and repository
     - [] Implement resource upload, retrieval, updating, and deletion functionality
     - [] Develop endpoints to associate resources with projects
 
