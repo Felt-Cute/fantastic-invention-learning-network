@@ -23,6 +23,7 @@
         <module>users</module>
         <module>discovery</module>
         <module>apigw</module>
+        <module>resources</module>
     </modules>
 
     <url/>
