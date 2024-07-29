@@ -129,7 +129,7 @@ docker compose up -d
 - `PUT /api/users/{id}` (admin)
     - Update user profile information (admin only).
 
-### [Project Management Service](http://localhost:8080/swagger-ui.html)
+### [Project Management Service](http://localhost:8182/swagger-ui.html)
 
 - `POST /api/projects`
     - Create a new project.
