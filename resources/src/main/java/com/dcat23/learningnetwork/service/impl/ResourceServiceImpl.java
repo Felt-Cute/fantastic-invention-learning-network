@@ -2,11 +2,13 @@ package com.dcat23.learningnetwork.service.impl;
 
 import com.dcat23.learningnetwork.ResourceRepository;
 import com.dcat23.learningnetwork.dto.ResourceResponse;
-import com.dcat23.learningnetwork.dto.ResourceDTO;
+import com.dcat23.learningnetwork.dto.ResourceUpdateDTO;
+import com.dcat23.learningnetwork.dto.ResourceUploadDTO;
 import com.dcat23.learningnetwork.exception.ResourceNotFoundException;
 import com.dcat23.learningnetwork.mapper.ResourceMapper;
 import com.dcat23.learningnetwork.model.Resource;
 import com.dcat23.learningnetwork.service.client.ResourceService;
+import com.dcat23.learningnetwork.service.client.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ public class ResourceServiceImpl implements ResourceService {
 
     private final ResourceRepository resourceRepository;
     private final ResourceMapper resourceMapper = ResourceMapper.INSTANCE;
+    private final S3Service s3Service;
 
     /**
      * @param resourceId the id of the Resource entity
@@ -51,7 +54,7 @@ public class ResourceServiceImpl implements ResourceService {
      * @return ResourceResponse
      */
     @Override
-    public ResourceResponse updateResource(Long resourceId, ResourceDTO resourceDTO) {
+    public ResourceResponse updateResource(Long resourceId, ResourceUpdateDTO resourceDTO) {
         Resource resource = findResourceById(resourceId);
         resourceMapper.update(resourceDTO, resource);
         Resource saved = resourceRepository.save(resource);
@@ -65,5 +68,18 @@ public class ResourceServiceImpl implements ResourceService {
     public void deleteResource(Long resourceId) {
         Resource resourceById = findResourceById(resourceId);
         resourceRepository.delete(resourceById);
+    }
+
+    /**
+     * @param resourceUploadDTO ResourceUploadDTO details
+     * @return ResourceResponse
+     */
+    @Override
+    public ResourceResponse uploadResource(ResourceUploadDTO resourceUploadDTO) {
+        String fileUrl = s3Service.upload(resourceUploadDTO.file());
+        Resource resource = resourceMapper.map(resourceUploadDTO);
+        resource.setFileUrl(fileUrl);
+        Resource saved = resourceRepository.save(resource);
+        return resourceMapper.map(saved);
     }
 }
