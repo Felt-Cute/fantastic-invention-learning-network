@@ -1,8 +1,7 @@
 package com.dcat23.learningnetwork.controller;
 
 import com.dcat23.learningnetwork.dto.ResourceResponse;
-import com.dcat23.learningnetwork.dto.ResourceUpdateDTO;
-import com.dcat23.learningnetwork.model.Resource;
+import com.dcat23.learningnetwork.dto.ResourceDTO;
 import com.dcat23.learningnetwork.service.client.ResourceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class ResourceController {
     }
 
     @PutMapping("/{resourceId}")
-    public ResponseEntity<ResourceResponse> updateResource(@PathVariable Long resourceId, @RequestBody ResourceUpdateDTO resourceDTO){
+    public ResponseEntity<ResourceResponse> updateResource(@PathVariable Long resourceId, @RequestBody ResourceDTO resourceDTO){
         ResourceResponse resource = resourceService.updateResource(resourceId, resourceDTO);
         return ResponseEntity.status(HttpStatus.OK).body(resource);
     }
