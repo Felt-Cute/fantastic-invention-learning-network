@@ -318,9 +318,9 @@ docker compose up -d
     - [] Ensure proper request validation and error handling
 
 10. **Implement Inter-Service Communication**
-    - [] Choose between REST or gRPC for service communication
-    - [] Set up service discovery using Eureka or Consul for dynamic service registration and discovery
-    - [] Configure load balancing for API calls through the API Gateway
+    - [x] Implement REST service communication using OpenFeign
+    - [x] Set up service discovery using Eureka or Consul for dynamic service registration and discovery
+    - [x] Configure load balancing for API calls through the API Gateway
 
 11. **Develop Event-Driven Architecture**
     - [] Integrate Kafka for event streaming and asynchronous communication between services
