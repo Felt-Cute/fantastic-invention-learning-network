@@ -275,7 +275,7 @@ docker compose up -d
     - [] Implement the database schema based on the defined tables for 
       - [x] users
       - [x] projects
-      - [] resources
+      - [x] resources
       - [] discussions
       - [] messages
       - [] notifications
@@ -300,7 +300,7 @@ docker compose up -d
 6. **Develop Resource Management Service**
     - [x] Create Resource entity and repository
     - [] Implement resource upload, retrieval, updating, and deletion functionality
-    - [] Develop endpoints to associate resources with projects
+    - [x] Develop endpoints to associate resources with projects
 
 7. **Develop Discussion Management Service**
     - [] Create Discussion and Message entities and repositories

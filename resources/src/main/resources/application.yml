@@ -15,7 +15,7 @@ spring:
         format_sql: true
         default_schema: ${DEFAULT_SCHEMA:resources}
         dialect: org.hibernate.dialect.PostgreSQLDialect
-    show-sql: false
+    show-sql: true
   datasource:
     url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:learning_network}
     password: ${DATABASE_PASSWORD:password}
