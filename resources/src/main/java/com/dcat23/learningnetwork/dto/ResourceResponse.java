@@ -12,7 +12,7 @@ public record ResourceResponse (
 
     String fileUrl,
 
-    Long uploadedByUserId,
+    Long userId,
 
     LocalDateTime createdAt
 ) {

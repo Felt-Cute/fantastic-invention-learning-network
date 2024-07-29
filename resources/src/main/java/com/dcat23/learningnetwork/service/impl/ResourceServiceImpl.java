@@ -30,7 +30,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public ResourceResponse getResourceById(Long resourceId) {
         Resource resource = findResourceById(resourceId);
-        return resourceMapper.map(resource);
+        return resourceMapper.toResponse(resource);
     }
 
     private Resource findResourceById(Long resourceId) {
@@ -45,7 +45,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public List<ResourceResponse> getResourcesByProject(Long projectId) {
         List<Resource> resources = resourceRepository.findByProjectId(projectId);
-        return resourceMapper.map(resources);
+        return resourceMapper.toResponse(resources);
     }
 
     /**
@@ -58,7 +58,7 @@ public class ResourceServiceImpl implements ResourceService {
         Resource resource = findResourceById(resourceId);
         resourceMapper.update(resourceDTO, resource);
         Resource saved = resourceRepository.save(resource);
-        return resourceMapper.map(saved);
+        return resourceMapper.toResponse(saved);
     }
 
     /**
@@ -77,9 +77,9 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public ResourceResponse uploadResource(ResourceUploadDTO resourceUploadDTO) {
         String fileUrl = s3Service.upload(resourceUploadDTO.file());
-        Resource resource = resourceMapper.map(resourceUploadDTO);
+        Resource resource = resourceMapper.toEntity(resourceUploadDTO);
         resource.setFileUrl(fileUrl);
         Resource saved = resourceRepository.save(resource);
-        return resourceMapper.map(saved);
+        return resourceMapper.toResponse(saved);
     }
 }

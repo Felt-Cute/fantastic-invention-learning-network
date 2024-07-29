@@ -4,9 +4,7 @@ import com.dcat23.learningnetwork.dto.ResourceResponse;
 import com.dcat23.learningnetwork.dto.ResourceUpdateDTO;
 import com.dcat23.learningnetwork.dto.ResourceUploadDTO;
 import com.dcat23.learningnetwork.model.Resource;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -18,11 +16,14 @@ public interface ResourceMapper {
 
     @Mapping(target = "fileUrl", ignore = true)
     @Mapping(target = "uploadedByUserId", source = "userId")
-    Resource map(ResourceUploadDTO resourceUploadDTO);
+    Resource toEntity(ResourceUploadDTO resourceUploadDTO);
 
-    ResourceResponse map(Resource resource);
+    @Mapping(target = "userId", source = "uploadedByUserId")
+    ResourceResponse toResponse(Resource resource);
 
-    List<ResourceResponse> map(List<Resource> resources);
+    @Mapping(target = "userId", source = "uploadedByUserId")
+    List<ResourceResponse> toResponse(List<Resource> resources);
 
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void update(ResourceUpdateDTO resourceUpdateDTO, @MappingTarget Resource resource);
 }
