@@ -1,4 +1,4 @@
-package com.dcat23.learningnetwork;
+package com.dcat23.learningnetwork.repository;
 
 import com.dcat23.learningnetwork.model.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;

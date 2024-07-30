@@ -57,3 +57,11 @@ management:
     health:
       probes:
         enabled: true
+
+aws:
+  accessKey: ${AWS_ACCESS_KEY_ID:"NOT_SET"}
+  secretKey: ${AWS_SECRET_ACCESS_KEY_ID:"NOT_SET"}
+  region: ${AWS_REGION:"us-east-1"}
+  s3:
+    buckets:
+      filn: "fantastic-invention-learning-network"

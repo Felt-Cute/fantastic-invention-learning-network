@@ -1,6 +1,6 @@
 package com.dcat23.learningnetwork.service.impl;
 
-import com.dcat23.learningnetwork.ResourceRepository;
+import com.dcat23.learningnetwork.repository.ResourceRepository;
 import com.dcat23.learningnetwork.dto.ResourceResponse;
 import com.dcat23.learningnetwork.dto.ResourceUpdateDTO;
 import com.dcat23.learningnetwork.dto.ResourceUploadDTO;
@@ -12,7 +12,9 @@ import com.dcat23.learningnetwork.service.client.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -76,10 +78,20 @@ public class ResourceServiceImpl implements ResourceService {
      */
     @Override
     public ResourceResponse uploadResource(ResourceUploadDTO resourceUploadDTO) {
-        String fileUrl = s3Service.upload(resourceUploadDTO.file());
+        String fileUrl = uploadToS3(resourceUploadDTO.file());
         Resource resource = resourceMapper.toEntity(resourceUploadDTO);
         resource.setFileUrl(fileUrl);
         Resource saved = resourceRepository.save(resource);
         return resourceMapper.toResponse(saved);
+    }
+
+    private String uploadToS3(MultipartFile file) {
+        String fileUrl = null;
+        try {
+            fileUrl = s3Service.upload(file);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return fileUrl;
     }
 }

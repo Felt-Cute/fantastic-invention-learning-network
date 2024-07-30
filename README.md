@@ -108,6 +108,8 @@ cp .env.example .env
 `DATABASE_PASSWORD`
 `DATABASE_USER`
 `JWT_SECRET`
+`AWS_ACCESS_KEY_ID`
+`AWS_SECRET_ACCESS_KEY`
 
 Start the services
 
