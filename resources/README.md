@@ -9,7 +9,7 @@ Facilitates uploading, accessing, and managing educational resources.
 - retrieval based on project association.
 
 ## [API Reference](http://localhost:8080/swagger-ui.html)
-- `POST /api/resources`
+- `POST /api/resources/upload`
     - Upload a new resource to a project.
 - `GET /api/resources/{resourceId}`
     - Retrieve details of a specific resource.
