@@ -15,6 +15,26 @@ services:
       - postgres
     restart: unless-stopped
 
+  eureka-server:
+    image: macchiato23/filn-discovery:0.0.1-SNAPSHOT
+    container_name: eureka-filn
+    ports:
+      - "8761:8761"
+    healthcheck:
+      test: "curl --fail --silent localhost:8761/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+#  apigw:
+#    image:  macchiato23/filn-apigw:0.0.1-SNAPSHOT
+#    container_name: apigw_filn
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - eureka-server
+
 networks:
   postgres:
     driver: bridge

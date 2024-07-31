@@ -1,20 +1,79 @@
-# Fantastic Invention Learning Network
+<a id="readme-top"></a>
+[![GitHub Stars][stars-shield]][stars-url]
+[![GitHub Issues][issues-shield]][issues-url]
+[![Current Version][version-shield]][repo-url]
+[![Live Demo][live-demo-shield]][live-demo-url]
 
-[![GitHub Stars](https://img.shields.io/github/stars/felt-cute/fantastic-invention-learning-network.svg)](https://github.com/felt-cute/fantastic-invention-learning-network/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/felt-cute/fantastic-invention-learning-network.svg)](https://github.com/felt-cute/fantastic-invention-learning-network/issues)
-[![Current Version](https://img.shields.io/badge/version-0.0.1-green.svg)](https://github.com/felt-cute/fantastic-invention-learning-network)
-[![Live Demo](https://img.shields.io/badge/demo-offline-red.svg)](https://fmhh.vercel.app)
 
-The goal of this project is to create a social media application tailored specifically for students and educators. 
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/felt-cute/fantastic-invention-learning-network">
+    <img src="logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-This platform will facilitate collaboration on academic projects, resource sharing, and discussions on various 
-educational topics. 
+<h3 align="center">Fantastic Invention Learning Network</h3>
 
-By enhancing peer learning and networking, the application aims to create a supportive community that fosters 
-academic growth and engagement.
+  <p align="center">
+    Collaborative Learning Network for Students and Educators
+    <br />
+    <a href="https://github.com/felt-cute/fantastic-invention-learning-network"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/felt-cute/fantastic-invention-learning-network">View Demo</a>
+    ·
+    <a href="https://github.com/felt-cute/fantastic-invention-learning-network/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    ·
+    <a href="https://github.com/felt-cute/fantastic-invention-learning-network/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  </p>
+</div>
+
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">Overview</a>
+      <ul>
+        <li><a href="#technical-stack">Tech Stack</a></li>
+        <li><a href="#core-features">Core Features</a></li>
+        <li><a href="#monetization-strategies">Monetization Strategies</a></li>
+      </ul>
+    </li>
+    <li><a href="#setup">Setup</a></li>
+    <li><a href="#modules">Modules</a></li>
+    <li><a href="#api-reference">API Reference</a></li>
+    <li><a href="#database-schema">Database Schema</a></li>
+    <li><a href="#implementation-steps">Implementation Steps</a></li>
+    <li>
+        <a href="#additional-considerations">Additional Considerations</a>
+        <ul>
+            <li><a href="#bonus-features">Bonus Features</a></li>
+            <li><a href="#to-do">To-Dos</a></li>
+            <li><a href="#future-features">Future Features</a></li>
+        </ul>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+    
+  </ol>
+</details>
 
 ---
-`## Technical Stack
+
+## Overview
+
+The goal of this project is to create a social media application tailored specifically for students and educators.
+
+This platform will facilitate collaboration on academic projects, resource sharing, and discussions on various
+educational topics.
+
+By enhancing peer learning and networking, the application aims to create a supportive community that fosters
+academic growth and engagement.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## Technical Stack
 
 ### Frontend
 - **Framework**: React or Angular for building a dynamic user interface.
@@ -29,7 +88,10 @@ academic growth and engagement.
 - **Cloud Provider**: AWS, Heroku, or DigitalOcean for hosting the application.
 - **Containerization**: Docker for containerizing the application for easier deployment and scalability.`
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ---
+
 ## Core Features
 - **User Management**: Registration, login, and profile management with role-based access control.
 - **Project Collaboration**: Create, join, and manage projects to facilitate teamwork.
@@ -37,13 +99,44 @@ academic growth and engagement.
 - **Discussion Forums**: Start discussions and engage in collaborative dialogues on academic topics.
 - **Notifications**: Real-time notifications about project updates and discussion replies.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ---
+
 ## Monetization Strategies
 1. **Freemium Model**: Offer basic features for free while charging for premium features such as advanced analytics, additional storage for resources, or exclusive webinars.
 2. **Sponsorships**: Partner with educational institutions or companies for sponsored content or advertisements.
 3. **Subscription Plans**: Provide subscription options for educators to access advanced tools for managing their courses and student interactions.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ---
+
+## Setup
+
+Copy environment variables to the [.env](.env) file
+```bash
+cp .env.example .env
+```
+`DATABASE_HOST`
+`DATABASE_PORT`
+`DATABASE_NAME`
+`DATABASE_PASSWORD`
+`DATABASE_USER`
+`JWT_SECRET`
+`AWS_ACCESS_KEY_ID`
+`AWS_SECRET_ACCESS_KEY`
+
+Start the services
+
+```bash
+docker compose up -d
+```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
 ## Modules
 
 ### [User Management Service](users/README.md)
@@ -54,7 +147,7 @@ academic growth and engagement.
 - **Functionality**: Manages creation, retrieval, updating, and deletion of projects.
 - **Core Features**: Project collaboration, membership management, and project details retrieval.
 
-### Resource Management Service
+### [Resource Management Service](resources/README.md)
 - **Functionality**: Facilitates uploading, accessing, and managing educational resources.
 - **Core Features**: Resource sharing, categorization, and retrieval based on project association.
 
@@ -94,28 +187,12 @@ academic growth and engagement.
 - **Functionality**: Ensures application security and performance monitoring.
 - **Core Features**: Implementing Spring Security for authentication, centralized logging, and monitoring solutions like ELK Stack or Prometheus.
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
-## Setup
 
-Copy environment variables to the [.env](.env) file
-```bash
-cp .env.example .env
-```
-`DATABASE_HOST`
-`DATABASE_PORT`
-`DATABASE_NAME`
-`DATABASE_PASSWORD`
-`DATABASE_USER`
-`JWT_SECRET`
 
-Start the services
-
-```bash
-docker compose up -d
-```
----
-## [API Reference](http://localhost:8080/swagger-ui.html)
+## [API Reference](http://localhost:8080/actuator/gateway/routes)
 
 ### [User Management Service](http://localhost:8181/swagger-ui.html)
 - `POST /api/users/register`
@@ -129,7 +206,7 @@ docker compose up -d
 - `PUT /api/users/{id}` (admin)
     - Update user profile information (admin only).
 
-### [Project Management Service](http://localhost:8080/swagger-ui.html)
+### [Project Management Service](http://localhost:8182/swagger-ui.html)
 
 - `POST /api/projects`
     - Create a new project.
@@ -195,6 +272,10 @@ docker compose up -d
    - Retrieve analytics data for a specific user.
 - `GET /api/analytics/project/{projectId}`
    - Retrieve analytics data for a specific project.
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ---
 ## Database schema
 
@@ -219,7 +300,7 @@ docker compose up -d
 
 ### [Resource Management Service](Resources/README.md#database-schema)
 
-#### [Resources]()
+#### [Resources](resources%2Fsrc%2Fmain%2Fjava%2Fcom%2Fdcat23%2Flearningnetwork%2Fmodel%2FResource.java)
 - `id` (Primary key)
 - `project_id` (Foreign key referencing projects.id)
 - `title`
@@ -262,6 +343,8 @@ docker compose up -d
 - `target_id` (ID of the resource or project)
 - `timestamp`
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ---
 ## Implementation Steps
 
@@ -275,7 +358,7 @@ docker compose up -d
     - [] Implement the database schema based on the defined tables for 
       - [x] users
       - [x] projects
-      - [] resources
+      - [x] resources
       - [] discussions
       - [] messages
       - [] notifications
@@ -298,9 +381,9 @@ docker compose up -d
     - [x] Develop endpoints to manage project membership
 
 6. **Develop Resource Management Service**
-    - [] Create Resource entity and repository
-    - [] Implement resource upload, retrieval, updating, and deletion functionality
-    - [] Develop endpoints to associate resources with projects
+    - [x] Create Resource entity and repository
+    - [x] Implement resource upload, retrieval, updating, and deletion functionality
+    - [x] Develop endpoints to associate resources with projects
 
 7. **Develop Discussion Management Service**
     - [] Create Discussion and Message entities and repositories
@@ -318,9 +401,9 @@ docker compose up -d
     - [] Ensure proper request validation and error handling
 
 10. **Implement Inter-Service Communication**
-    - [] Choose between REST or gRPC for service communication
-    - [] Set up service discovery using Eureka or Consul for dynamic service registration and discovery
-    - [] Configure load balancing for API calls through the API Gateway
+    - [x] Implement REST service communication using OpenFeign
+    - [x] Set up service discovery using Eureka or Consul for dynamic service registration and discovery
+    - [x] Configure load balancing for API calls through the API Gateway
 
 11. **Develop Event-Driven Architecture**
     - [] Integrate Kafka for event streaming and asynchronous communication between services
@@ -350,6 +433,8 @@ docker compose up -d
     - [] Create API documentation using Swagger or OpenAPI
     - [] Write user guides and technical documentation for future development
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ---
 ## Additional Considerations
 - **Data Privacy**: Ensure compliance with data protection regulations (e.g., GDPR, FERPA).
@@ -370,11 +455,23 @@ docker compose up -d
 - **Integration with External Tools**: Allow integration with tools like Google Drive, Dropbox, or educational platforms (e.g., Moodle).
 - **AI-Powered Recommendations**: Implement machine learning algorithms to suggest resources and discussions based on user behavior.
 - **Offline Access**: Enable users to access certain features and resources without an internet connection.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ---
-## 🔗 Links
-[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://dcatuns.vercel.app/)
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/devin-catuns/)
-[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/)
+
+<!-- CONTACT -->
+## Contact
+
+Devin Catuns - <a href="mailto:devincatuns1@gmail.com">devincatuns1@gmail.com</a>
+
+[![LinkedIn][linkedin-shield]][linkedin-url]
+[![portfolio][porfolio-shield]][portfolio-url]
+
+[Fantastic Invention Learning Network][repo-url]
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 ## Buy me a coffee
@@ -382,8 +479,25 @@ docker compose up -d
 Whether you use this project, have learned something from it, or just like it, please consider supporting it by buying me a coffee, so I can dedicate more time on open-source projects like this :)
 
 <a href="https://www.buymeacoffee.com/devincatunj" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
----
-## Feedback
-If you have any feedback, please reach out to me by 
 
-<a href="mailto:devincatuns1@gmail.com">email</a>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[version-shield]: https://img.shields.io/badge/version-0.0.1-green.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/felt-cute/fantastic-invention-learning-network.svg?style=for-the-badge&logo=github
+[contributors-url]: https://github.com/felt-cute/fantastic-invention-learning-network/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/felt-cute/fantastic-invention-learning-network.svg?style=for-the-badge
+[forks-url]: https://github.com/felt-cute/fantastic-invention-learning-network/network/members
+[stars-shield]: https://img.shields.io/github/stars/felt-cute/fantastic-invention-learning-network.svg?style=for-the-badge&&logo=github
+[stars-url]: https://github.com/felt-cute/fantastic-invention-learning-network/stargazers
+[issues-shield]: https://img.shields.io/github/issues/felt-cute/fantastic-invention-learning-network.svg?style=for-the-badge
+[issues-url]: https://github.com/felt-cute/fantastic-invention-learning-network/issues
+[license-shield]: https://img.shields.io/github/license/felt-cute/fantastic-invention-learning-network.svg?style=for-the-badge
+[license-url]: https://github.com/felt-cute/fantastic-invention-learning-network/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=0A66C2
+[linkedin-url]: https://www.linkedin.com/in/devin-catuns/
+[live-demo-shield]: https://img.shields.io/badge/demo-offline-red.svg?style=for-the-badge
+[live-demo-url]: https://filn.vercel.app
+[repo-url]: https://github.com/felt-cute/fantastic-invention-learning-network
+[porfolio-shield]: https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white
+[portfolio-url]: https://dcat23.vercel.app/
